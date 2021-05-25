@@ -40,6 +40,7 @@
     "react-test-renderer": "^16.8.6"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "babel-polyfill": "^6.26.0",
     "electron-is-dev": "^1.1.0",
     "react": "^16.8.6",
