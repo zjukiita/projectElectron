@@ -3,9 +3,14 @@ import React from 'react';
 const Movies = ({ movie }) => {
     return (
         <>
-            <div>
-                <h3>{movie.nome}</h3>
-            </div>
+            <body>
+                <div>
+                    <img
+                        src={movie.imagem}
+                        alt={movie.nome}    
+                    />
+                </div>
+            </body>
         </>
     );
 };

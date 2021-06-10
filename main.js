@@ -5,6 +5,7 @@ import 'babel-polyfill';
 
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const Menu = electron.Menu;
 
 let mainWindow;
 
@@ -13,7 +14,8 @@ const createWindow = () => {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      webSecurity: process.env.NODE_ENV !== 'development',
     }
   });
 
@@ -27,6 +29,8 @@ const createWindow = () => {
     mainWindow = null;
   });
 };
+
+/* Menu.setApplicationMenu(null) */ /* Retirar menu padrão */
 
 app.on('ready', createWindow);
 

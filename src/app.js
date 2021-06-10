@@ -1,9 +1,16 @@
 import React from 'react';
-import Movie from './screens/ListMovie'
+import { HashRouter, Route, Switch } from 'react-router-dom'
+
+/* Screens */
+import Home from './screens/Home'
 
 const App = () => {
     return (
-        <Movie />
+        <HashRouter>
+            <Switch>
+                <Route exact path="/" component={Home} />
+            </Switch>
+        </HashRouter>
     );
 };
 
