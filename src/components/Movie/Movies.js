@@ -9,6 +9,7 @@ const Movies = ({ movie }) => {
                         src={movie.imagem}
                         alt={movie.nome}    
                     />
+                    <h2>{movie.categoria}</h2>
                 </div>
             </body>
         </>

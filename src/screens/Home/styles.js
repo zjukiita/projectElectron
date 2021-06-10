@@ -39,3 +39,7 @@ export const Logo = styled.img`
 export const Search = styled.input`
     border-radius: 8px;
 `
+
+export const Slide = styled.img`
+    height: 100%;
+`
