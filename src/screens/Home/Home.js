@@ -9,8 +9,6 @@ import * as s from './styles';
 // Bootstrap 
 import * as Bs from 'react-bootstrap'
 
-
-
 const Home = () => {
 
     const [movie, setMovie] = useState([]);
@@ -30,7 +28,7 @@ const Home = () => {
 
     return (
         <>
-            <nav>
+            {/*             <nav>
                 <s.Navbar>
                     <s.Option><s.Link><s.Logo src={path.join(__dirname, '../../assets/logo.png')} /></s.Link></s.Option>
                     <s.Option><s.Link>Início</s.Link></s.Option>
@@ -39,7 +37,29 @@ const Home = () => {
                     <s.SearchLi><s.Link>Minha Lista</s.Link></s.SearchLi>
                     <s.Option><s.Search /></s.Option>
                 </s.Navbar>
-            </nav>
+            </nav> */}
+
+            <Bs.Navbar fixed="top" variant="dark">
+                <Bs.Navbar.Brand href="#home"><s.Logo src={path.join(__dirname, '../../assets/logo.png')} /></Bs.Navbar.Brand>
+                <Bs.Nav className="mr-auto">
+                    <Bs.Nav.Link href="#home">Início</Bs.Nav.Link>
+                    <Bs.Nav.Link href="#features">Filmes</Bs.Nav.Link>
+                    <Bs.Nav.Link href="#pricing">Lançamentos</Bs.Nav.Link>
+                    <Bs.Nav.Link href="#pricing">Minha Lista</Bs.Nav.Link>
+                </Bs.Nav>
+                <Bs.Form inline>
+                    <Bs.FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                    <s.UserImg href="action2"/>
+                    <Bs.NavDropdown id="navbarScrollingDropdown">
+                        <Bs.NavDropdown.Item href="#action3">Meu Perfil</Bs.NavDropdown.Item>
+                        <Bs.NavDropdown.Item href="#action4">Favoritos</Bs.NavDropdown.Item>
+                        <Bs.NavDropdown.Item href="#action5">Trocar Perfil</Bs.NavDropdown.Item>
+                        <Bs.NavDropdown.Item href="#action5">Configurações</Bs.NavDropdown.Item>
+                        <Bs.NavDropdown.Divider />
+                        <Bs.NavDropdown.Item href="#action6">Sair</Bs.NavDropdown.Item>
+                    </Bs.NavDropdown>
+                </Bs.Form>
+            </Bs.Navbar>
 
             <Bs.Carousel>
                 <Bs.Carousel.Item interval={2000}>
@@ -65,7 +85,7 @@ const Home = () => {
                     </Bs.Carousel.Caption>
                 </Bs.Carousel.Item>
                 <Bs.Carousel.Item interval={2000}>
-                    <s.Slide
+                    <img
                         className="d-block w-100"
                         src={path.join(__dirname, '../../assets/slide3.jpg')}
                         alt="Third slide"
