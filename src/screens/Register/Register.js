@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import * as Yup from 'yup'
 import api from '../../services/api'
 import { useFormik, Formik } from 'formik';
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 // Styled Components \\
 import * as s from './styles'
@@ -91,6 +91,8 @@ const Register = () => {
                                 </div>
 
                                 <s.Button type="button" onClick={() => handleSubmit()}>Enviar</s.Button>
+
+                                <Link to="/login">Login</Link>
                             </>
                         )}
                     </Formik>

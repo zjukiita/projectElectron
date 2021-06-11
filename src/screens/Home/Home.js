@@ -46,7 +46,7 @@ const Home = () => {
                         <Bs.NavDropdown.Item href="#action5">Trocar Perfil</Bs.NavDropdown.Item>
                         <Bs.NavDropdown.Item href="#action5">Configurações</Bs.NavDropdown.Item>
                         <Bs.NavDropdown.Divider />
-                        <Bs.NavDropdown.Item><Link to="/Register">Sair</Link></Bs.NavDropdown.Item>
+                        <Bs.NavDropdown.Item><Link to="/Login">Sair</Link></Bs.NavDropdown.Item>
                     </Bs.NavDropdown>
                 </Bs.Form>
             </Bs.Navbar>

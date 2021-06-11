@@ -3,6 +3,7 @@ import * as Yup from 'yup'
 import api from '../../services/api'
 import { useFormik, Formik } from 'formik';
 import { useHistory } from 'react-router-dom'
+import { Alert, AlertTitle } from '@material-ui/core'
 
 // Styled Components \\
 import * as s from './styles'
@@ -13,19 +14,17 @@ const Login = () => {
     const handleLogin = useCallback(async (data) => {
         try {
             const schema = Yup.object().shape({
-                email: Yup.string().email('Email não encontrado!').required('Email ou senha inválidos!'),
-                senha: Yup.string().min(6, 'A senha deve conter no mínimo 6 caracteres').required('Email ou senha inválidos!'),
+                email: Yup.string().email('Email inválido!').required('Informe seu E-mail!'),
+                senha: Yup.string().min(6, 'A senha deve conter no mínimo 6 caracteres').required('Informe sua senha!'),
             });
             await schema.validate(data);
             const response = await api.post('/login', data);
-            console.log(response)
-            const jsonData = JSON.stringify(response.data);
-            history.push('/')
         }
         catch (error) {
             if (error instanceof Yup.ValidationError) {
                 alert(`${error.message}`)
             };
+            alert('Credencias incorretas!')
         };
     }, []);
 
