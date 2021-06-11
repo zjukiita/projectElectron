@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Movies from '../../components/Movie';
 import api from '../../services/api';
 import path from 'path';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 // Styled Components
 import * as s from './styles';
