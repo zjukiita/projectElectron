@@ -9,10 +9,28 @@
 </head>
 
 <body>
+  <!-- Script de transição da Navbar -->
+  <script type="text/javascript">
+    window.jQuery = window.$ = require('jquery');
+
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 100) {
+        $('.navbar').css("background-color", "#212427")
+        $('.navbar').css("transition", "1s")
+      } else {
+        $('.navbar').css("background-color", "transparent")
+      }
+    });
+  </script>
+
   <div id="app">
   </div>
   <script src="./index.js"></script>
   <script src="http://localhost:35729/livereload.js"></script>
+
+  <script src="./js/bootstrap.min.js"></script>
+
+
 </body>
 
 </html>

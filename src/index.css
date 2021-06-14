@@ -2,9 +2,26 @@ body {
     margin: 0px;
 }
 
+/* Background da páginas Registro e Login! */
+.sc-hKFxyN {
+    background-image: url(./assets/bgRegister.jpg);
+}
+
+.sc-pNWdM {
+    background-image: url(./assets/bgRegister.jpg)
+}
+
 .hello {
     font-family: "Century Gothic";
     width: 500px;
     margin: 70px auto;
     text-align: center;
+}
+
+.navbar .form-inline {
+    margin-right: 8%;
+}
+
+.navbar .form-inline .dropdown a {
+    color: #000;
 }
