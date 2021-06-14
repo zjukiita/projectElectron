@@ -1,12 +1,9 @@
-import styled, { createGlobalStyle } from 'styled-components';
-
-export const GlobalStyle = createGlobalStyle`
-    * {
-        background-color: #666;
-    }
-`;
+import styled from 'styled-components';
 
 export const Teste = styled.div`
-    background-color: orange;
+    background-color: #7600a9 ;
+    width: 20vw;
+    height: 100vh;
+    text-align: center;
 `;
 

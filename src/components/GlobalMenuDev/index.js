@@ -1,35 +1,31 @@
 import React from 'react';
-import { GlobalStyle, Teste } from './styles';
+import { Teste } from './styles';
 import { Link } from 'react-router-dom';
 
 const GlobalMenuDev = () => {
     return (
         <div>
-            <GlobalStyle/>
             <Teste>
                 <nav>
                     <div>
                         <Link style={{ 
                             color: "#fff",
-                            fontSize: "30px",
+                            fontSize: "3vw",
                             textTransform: "uppercase",
-                            
                         }} to="/"> Home </Link>
                     </div>
                     <div>
                         <Link style={{ 
                             color: "#fff", 
-                            fontSize: "30px", 
+                            fontSize: "3vw", 
                             textTransform: "uppercase",
-                            
                         }} to="/DevMovies"> Filmes </Link>
                     </div>
                     <div>
                         <Link style={{ 
                             color: "#fff", 
-                            fontSize: "30px", 
+                            fontSize: "3vw", 
                             textTransform: "uppercase",
-                            
                         }} to="/DevUsers"> Usuários </Link>
                     </div>
                 </nav>

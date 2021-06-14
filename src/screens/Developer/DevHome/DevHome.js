@@ -1,12 +1,19 @@
 import React from 'react';
 import GlobalMenuDev from '../../../components/GlobalMenuDev';
+import { Render } from './styles';
+
 
 const DevHome = () => {
+
+
+    
     return (
-        <>
+        <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }} >
             <GlobalMenuDev />
-            <h1>Home</h1>
-        </>
+            <div>
+                <h1>Home</h1>
+            </div>
+        </div>
     )
 }
 
