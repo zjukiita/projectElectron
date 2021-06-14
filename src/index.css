@@ -11,6 +11,18 @@ body {
     background-image: url(./assets/bgRegister.jpg)
 }
 
+/* Modal */
+
+.modal-header {
+    background-color: #363636;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.modal-body {
+    background-color: #363636;
+}
+
 .hello {
     font-family: "Century Gothic";
     width: 500px;

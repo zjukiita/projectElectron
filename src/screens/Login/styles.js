@@ -34,11 +34,11 @@ export const Form = styled.form`
 export const Button = styled.button`
     border: 0;
     color: #fff;
-    transition: 0.6s;
     font-size: 1rem;
     cursor: pointer;
     margin-top: 20px;
     font-weight: 500;
+    transition: 0.6s;
     border-radius: 4px;
     margin-top: 0.5rem;
     text-align: center;
@@ -50,4 +50,77 @@ export const Button = styled.button`
         border: 2px #7600a9 solid;
         background-color: #363636;
     }
+`
+
+export const ButtonRight = styled.button`
+    border: 0;
+    color: #fff;
+    float: right;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: 500;
+    transition: 0.6s;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    text-align: center;
+    background: #7600a9;
+    padding: 0.5px 25px;
+
+    &:hover {
+        color: #7600a9;
+        border: 2px #7600a9 solid;
+        background-color: #363636;
+    }
+`
+
+export const ButtonRegister = styled.button`
+    border: 0;
+    color: #fff;
+    float: right;
+    height: 45px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: 500;
+    transition: 0.6s;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    text-align: center;
+    background: #7600a9;
+    padding: 0.5px 25px;
+
+    &:hover {
+        color: #7600a9;
+        border: 2px #7600a9 solid;
+        background-color: #363636;
+    }
+`
+
+export const ButtonRegisterLeft = styled.button`
+    border: 0;
+    color: #fff;
+    float: left;
+    height: 45px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: 500;
+    transition: 0.6s;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    text-align: center;
+    background: #7600a9;
+    padding: 0.5px 25px;
+
+    &:hover {
+    color: #7600a9;
+    border: 2px #7600a9 solid;
+    background-color: #363636;
+    }
+`
+
+export const ModalFooter = styled.div`
+    border-top: 1px #666 solid;
+
 `
