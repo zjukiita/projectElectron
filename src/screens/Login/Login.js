@@ -1,12 +1,14 @@
-import React, { useCallback, AsyncStorage } from 'react';
+import React, { useCallback } from 'react';
 import * as Yup from 'yup'
 import api from '../../services/api'
 import { useFormik, Formik } from 'formik';
 import { useHistory } from 'react-router-dom'
-import { Alert, AlertTitle } from '@material-ui/core'
 
 // Styled Components \\
 import * as s from './styles'
+
+// Bootstrap 
+import Modal from 'react-bootstrap/Modal'
 
 const Login = () => {
     const history = useHistory();
@@ -19,6 +21,7 @@ const Login = () => {
             });
             await schema.validate(data);
             const response = await api.post('/login', data);
+            history.push('/home')
         }
         catch (error) {
             if (error instanceof Yup.ValidationError) {
