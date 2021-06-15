@@ -1,9 +1,19 @@
 import styled from 'styled-components';
 
-export const Teste = styled.div`
+export const MenuBar = styled.div`
     background-color: #7600a9 ;
-    width: 20vw;
+    width: 17vw;
     height: 100vh;
-    text-align: center;
+    padding-left: 10px;
+    padding-top: 15px;
+`;
+
+export const Color = styled.div`
+    a {
+        color: #fff;
+        &:hover {
+            color: #666;
+        }
+    }
 `;
 
