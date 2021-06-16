@@ -41,7 +41,7 @@ const Home = () => {
         } catch (error) {
             console.log('Falha no carregamento dos filmes de')
         }
-    })
+    }, [])
 
     useEffect(() => {
         loadingComedy();
