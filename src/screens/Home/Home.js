@@ -12,20 +12,42 @@ import * as Bs from 'react-bootstrap'
 
 const Home = () => {
 
-    const [movie, setMovie] = useState([]);
+    const [comedy, setComedy] = useState([]);
+    const [adventure, setAdventure] = useState([]);
+    const [terror , setTerror] = useState([]);
 
-    const loadingMovies = useCallback(async () => {
+    const loadingComedy = useCallback(async () => {
         try {
-            const response = await api.get('/filmes');
-            if (response.data) setMovie(response.data);
+            const response = await api.get('/filmes/categoria/Comédia');
+            if (response.data) setComedy(response.data);
         } catch (error) {
-            console.log('Ocorreu uma falha na comunicação com a API')
+            console.log('Falha no carregamento dos filmes de comédia!')
         }
     }, []);
 
+    const loadingAdventure = useCallback(async () => {
+        try {
+            const response = await api.get('/filmes/categoria/Aventura');
+            if (response.data) setAdventure(response.data);
+        } catch (error) {
+            console.log('Falha no carregamento dos filmes de aventura!')
+        }
+    }, []);
+
+    const loadingTerror = useCallback(async () => {
+        try {
+            const response = await api.get('/filmes/categoria/Terror');
+            if (response.data) setTerror(response.data);
+        } catch (error) {
+            console.log('Falha no carregamento dos filmes de')
+        }
+    })
+
     useEffect(() => {
-        loadingMovies();
-    }, [loadingMovies]);
+        loadingComedy();
+        loadingAdventure();
+        loadingTerror();
+    }, [loadingComedy, loadingAdventure, loadingTerror]);
 
     return (
         <>
@@ -88,13 +110,73 @@ const Home = () => {
             </Bs.Carousel>
 
             <h1>Lista de filmes</h1>
-            <ul>
-                {movie.map(m => {
+            {/*             <div>
+                {comedy.map(ac => {
                     return (
-                        <Movies key={m.id} movie={m} />
+                        <Movies key={ac.id} movie={ac} />
                     );
                 })}
-            </ul>
+            </div> */}
+
+            <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+                <div className={'MultiCarousel-inner'}>
+                    {comedy.map(c => {
+                        return (
+                            <div className={'item'}>
+                                <div className={'pad15'}>
+                                    <p className={'lead'}>{c.nome}</p>
+                                    <img
+                                        src={c.imagem}
+                                    />
+                                    <p>{c.categoria}</p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+                <s.ButtonCarousel className={'leftLst'}><i class="fas fa-angle-left"></i></s.ButtonCarousel>
+                <s.ButtonCarousel className={'rightLst'}><i class="fas fa-angle-right"></i></s.ButtonCarousel>
+            </div>
+
+            <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+                <div className={'MultiCarousel-inner'}>
+                    {adventure.map(ad => {
+                        return (
+                            <div className={'item'}>
+                                <div className={'pad15'}>
+                                    <p className={'lead'}>{ad.nome}</p>
+                                    <img
+                                        src={ad.imagem}
+                                    />
+                                    <p>{ad.categoria}</p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+                <s.ButtonCarousel className={'leftLst'}><i class="fas fa-angle-left"></i></s.ButtonCarousel>
+                <s.ButtonCarousel className={'rightLst'}><i class="fas fa-angle-right"></i></s.ButtonCarousel>
+            </div>
+
+            <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+                <div className={'MultiCarousel-inner'}>
+                    {terror.map(t => {
+                        return (
+                            <div className={'item'}>
+                                <div className={'pad15'}>
+                                    <p className={'lead'}>{t.nome}</p>
+                                    <img
+                                        src={t.imagem}
+                                    />
+                                    <p>{t.categoria}</p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+                <s.ButtonCarousel className={'leftLst'}><i class="fas fa-angle-left"></i></s.ButtonCarousel>
+                <s.ButtonCarousel className={'rightLst'}><i class="fas fa-angle-right"></i></s.ButtonCarousel>
+            </div>
         </>
     );
 };

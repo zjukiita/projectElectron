@@ -32,7 +32,6 @@ const Login = () => {
         };
     }, []);
 
-
     const handleRegister = useCallback(async (data) => {
         try {
             const schema = Yup.object().shape({
@@ -45,7 +44,7 @@ const Login = () => {
             await schema.validate(data);
             const response = api.post('/users', data);
             alert('Registro realizado com sucesso!');
-            history.push('/login')
+            setModalShow(false);
         }
         catch (error) {
             if (error instanceof Yup.ValidationError) {
@@ -90,7 +89,6 @@ const Login = () => {
                                     />
                                 </div>
                                 <s.Button type="button" onClick={() => handleSubmit()}>Enviar</s.Button>
-                                <Link to='/register'>Registro</Link>
                                 <s.ButtonRight type="button" onClick={() => setModalShow(true)}>Crie sua conta</s.ButtonRight>
                             </>
                         )}
@@ -103,12 +101,8 @@ const Login = () => {
                         aria-labelledby="contained-modal-title-vcenter"
                         centered
                     >
-                        <Modal.Header /* closeButton */>
-                            <Modal.Title id="contained-modal-title-vcenter">
-                                <s.Title>Cadastro</s.Title>
-                            </Modal.Title>
-                        </Modal.Header>
                         <Modal.Body>
+                            <s.Title>Cadastro</s.Title>
                             <Formik
                                 enableReinitialize
                                 onSubmit={handleRegister}

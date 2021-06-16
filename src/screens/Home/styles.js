@@ -12,3 +12,17 @@ export const UserImg = styled.img`
     margin-left: 50px;
     margin-right: -5px;
 `
+export const ButtonCarousel = styled.button`
+    color: #000;
+    border: none;
+    transition: 1s;
+    font-size: 42px;
+    background-color: transparent;
+
+    &:hover {
+        color: #101010;
+        font-size: 48px;
+    }
+
+`
+

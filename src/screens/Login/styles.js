@@ -6,7 +6,7 @@ export const Main = styled.main`
     border-radius: 8px;
     line-height: 2.8rem;
     background: #363636;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.591);
 `
 export const Content = styled.div`
     margin: 0;
