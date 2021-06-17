@@ -6,28 +6,14 @@
   <link rel="stylesheet" type="text/css" href="./index.css">
   <title>SenacPlay Desktop</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
-  
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
-
-
-  <!-- Script de transição da Navbar -->
-  <script type="text/javascript">
-    window.jQuery = window.$ = require('jquery');
-
-    $(window).scroll(function () {
-      if ($(this).scrollTop() > 100) {
-        $('.navbar').css("background-color", "#212427")
-        $('.navbar').css("transition", "1s")
-      } else {
-        $('.navbar').css("background-color", "transparent")
-      }
-    });
-  </script>
 
   <script type="text/javascript">
     window.jQuery = window.$ = require('jquery')
@@ -134,6 +120,20 @@
         ResCarousel(ell, Parent, slide);
       }
 
+    });
+  </script>
+
+  <!-- Script de transição da Navbar -->
+  <script type="text/javascript">
+    window.jQuery = window.$ = require('jquery');
+
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 100) {
+        $('.navbar').css("background-color", "#212427")
+        $('.navbar').css("transition", "1s")
+      } else {
+        $('.navbar').css("background-color", "transparent")
+      }
     });
   </script>
 
