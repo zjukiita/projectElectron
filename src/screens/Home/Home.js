@@ -13,8 +13,15 @@ import * as Bs from 'react-bootstrap'
 const Home = () => {
 
     const [comedy, setComedy] = useState([]);
+    const [terror, setTerror] = useState([]);
+    const [tragedy, setTragedy] = useState([]);
+    const [classic, setClassic] = useState([]);
+    const [romance, setRomance] = useState([]);
+    const [childish, setChildish] = useState([]);
     const [adventure, setAdventure] = useState([]);
-    const [terror , setTerror] = useState([]);
+    const [shortFilm, setShortFilm] = useState([]);
+
+    // Funções de renderização das categorias de filme
 
     const loadingComedy = useCallback(async () => {
         try {
@@ -39,15 +46,65 @@ const Home = () => {
             const response = await api.get('/filmes/categoria/Terror');
             if (response.data) setTerror(response.data);
         } catch (error) {
-            console.log('Falha no carregamento dos filmes de')
+            console.log('Falha no carregamento dos filmes de terror!')
         }
-    }, [])
+    }, []);
+
+    const loadingChildish = useCallback(async () => {
+        try {
+            const response = await api.get('/filmes/categoria/Infantil');
+            if (response.data) setChildish(response.data);
+        } catch (error) {
+            console.log('Falha no carregamento dos filmes infantis!')
+        }
+    }, []);
+
+    const loadingShortFilm = useCallback(async () => {
+        try {
+            const response = await api.get('/filmes/categoria/Curta-Metragem')
+            if (response.data) setShortFilm(response.data)
+        } catch (error) {
+            console.log('Falha no carregamento dos filmes de curta-metragem!')
+        }
+    }, []);
+
+    const loadingTragedy = useCallback(async () => {
+        try {
+            const response = await api.get('/filmes/categoria/Drama');
+            if(response.data) setTragedy(response.data)
+        } catch (error) {
+            console.log('Falha no carregamento dos filmes de drama!')
+        }
+    }, []);
+
+    const loadingClassic = useCallback(async () => {
+        try {
+            const response = await api.get('/filmes/categoria/Clássico');
+            if(response.data) setClassic(response.data)
+        } catch (error) {
+            console.log('Falha no carregamento dos filmes clássicos!')
+        }
+    }, []);
+
+    const loadingRomance = useCallback(async () => {
+        try {
+            const response = await api.get('/filmes/categoria/Romance');
+            if(response.data) setRomance(response.data)
+        } catch (error) {
+            console.log('Falha no carregamento dos filmes de romance!')
+        }
+    }, []);
 
     useEffect(() => {
         loadingComedy();
         loadingAdventure();
         loadingTerror();
-    }, [loadingComedy, loadingAdventure, loadingTerror]);
+        loadingChildish();
+        loadingShortFilm();
+        loadingTragedy();
+        loadingClassic();
+        loadingRomance();
+    }, [loadingComedy, loadingAdventure, loadingTerror, loadingChildish, loadingShortFilm, loadingTragedy, loadingClassic, loadingRomance]);
 
     return (
         <>
@@ -109,22 +166,13 @@ const Home = () => {
                 </Bs.Carousel.Item>
             </Bs.Carousel>
 
-            <h1>Lista de filmes</h1>
-            {/*             <div>
-                {comedy.map(ac => {
-                    return (
-                        <Movies key={ac.id} movie={ac} />
-                    );
-                })}
-            </div> */}
-
             <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+                <h2>Comédia</h2>
                 <div className={'MultiCarousel-inner'}>
                     {comedy.map(c => {
                         return (
-                            <div className={'item'}>
+                            <div className={'item'} key={c.id}>
                                 <div className={'pad15'}>
-                                    <p className={'lead'}>{c.nome}</p>
                                     <img
                                         src={c.imagem}
                                     />
@@ -134,17 +182,17 @@ const Home = () => {
                         );
                     })}
                 </div>
-                <s.ButtonCarousel className={'leftLst'}><i class="fas fa-angle-left"></i></s.ButtonCarousel>
-                <s.ButtonCarousel className={'rightLst'}><i class="fas fa-angle-right"></i></s.ButtonCarousel>
+                <s.ButtonCarousel className={'leftLst'}><i className={'fas fa-angle-left'}></i></s.ButtonCarousel>
+                <s.ButtonCarousel className={'rightLst'}><i className={'fas fa-angle-right'}></i></s.ButtonCarousel>
             </div>
 
             <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+                <h2>Aventura</h2>
                 <div className={'MultiCarousel-inner'}>
                     {adventure.map(ad => {
                         return (
-                            <div className={'item'}>
+                            <div className={'item'} key={ad.id}>
                                 <div className={'pad15'}>
-                                    <p className={'lead'}>{ad.nome}</p>
                                     <img
                                         src={ad.imagem}
                                     />
@@ -154,17 +202,17 @@ const Home = () => {
                         );
                     })}
                 </div>
-                <s.ButtonCarousel className={'leftLst'}><i class="fas fa-angle-left"></i></s.ButtonCarousel>
-                <s.ButtonCarousel className={'rightLst'}><i class="fas fa-angle-right"></i></s.ButtonCarousel>
+                <s.ButtonCarousel className={'leftLst'}><i className={'fas fa-angle-left'}></i></s.ButtonCarousel>
+                <s.ButtonCarousel className={'rightLst'}><i className={'fas fa-angle-right'}></i></s.ButtonCarousel>
             </div>
 
             <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+                <h2>Terror</h2>
                 <div className={'MultiCarousel-inner'}>
                     {terror.map(t => {
                         return (
-                            <div className={'item'}>
+                            <div className={'item'} key={t.id}>
                                 <div className={'pad15'}>
-                                    <p className={'lead'}>{t.nome}</p>
                                     <img
                                         src={t.imagem}
                                     />
@@ -174,8 +222,109 @@ const Home = () => {
                         );
                     })}
                 </div>
-                <s.ButtonCarousel className={'leftLst'}><i class="fas fa-angle-left"></i></s.ButtonCarousel>
-                <s.ButtonCarousel className={'rightLst'}><i class="fas fa-angle-right"></i></s.ButtonCarousel>
+                <s.ButtonCarousel className={'leftLst'}><i className={'fas fa-angle-left'}></i></s.ButtonCarousel>
+                <s.ButtonCarousel className={'rightLst'}><i className={'fas fa-angle-right'}></i></s.ButtonCarousel>
+            </div>
+
+            <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+                <h2>Infantil</h2>
+                <div className={'MultiCarousel-inner'}>
+                    {childish.map(ch => {
+                        return (
+                            <div className={'item'} key={ch.id}>
+                                <div className={'pad15'}>
+                                    <img
+                                        src={ch.imagem}
+                                    />
+                                    <p>{ch.categoria}</p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+                <s.ButtonCarousel className={'leftLst'}><i className={'fas fa-angle-left'}></i></s.ButtonCarousel>
+                <s.ButtonCarousel className={'rightLst'}><i className={'fas fa-angle-right'}></i></s.ButtonCarousel>
+            </div>
+
+
+            <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+                <h2>Curta-Metragem</h2>
+                <div className={'MultiCarousel-inner'}>
+                    {shortFilm.map(sf => {
+                        return (
+                            <div className={'item'} key={sf.id}>
+                                <div className={'pad15'}>
+                                    <img
+                                        src={sf.imagem}
+                                    />
+                                    <p>{sf.categoria}</p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+                <s.ButtonCarousel className={'leftLst'}><i className={'fas fa-angle-left'}></i></s.ButtonCarousel>
+                <s.ButtonCarousel className={'rightLst'}><i className={'fas fa-angle-right'}></i></s.ButtonCarousel>
+            </div>
+
+            <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+                <h2>Drama</h2>
+                <div className={'MultiCarousel-inner'}>
+                    {tragedy.map(d => {
+                        return (
+                            <div className={'item'} key={d.id}>
+                                <div className={'pad15'}>
+                                    <img
+                                        src={d.imagem}
+                                    />
+                                    <p>{d.categoria}</p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+                <s.ButtonCarousel className={'leftLst'}><i className={'fas fa-angle-left'}></i></s.ButtonCarousel>
+                <s.ButtonCarousel className={'rightLst'}><i className={'fas fa-angle-right'}></i></s.ButtonCarousel>
+            </div>
+
+            <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+                <h2>Romance</h2>
+                <div className={'MultiCarousel-inner'}>
+                    {romance.map(r => {
+                        return (
+                            <div className={'item'} key={r.id}>
+                                <div className={'pad15'}>
+                                    <img
+                                        src={r.imagem}
+                                    />
+                                    <p>{r.categoria}</p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+                <s.ButtonCarousel className={'leftLst'}><i className={'fas fa-angle-left'}></i></s.ButtonCarousel>
+                <s.ButtonCarousel className={'rightLst'}><i className={'fas fa-angle-right'}></i></s.ButtonCarousel>
+            </div>
+
+            <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+                <h2>Clássicos</h2>
+                <div className={'MultiCarousel-inner'}>
+                    {classic.map(cl => {
+                        return (
+                            <div className={'item'} key={cl.id}>
+                                <div className={'pad15'}>
+                                    <img
+                                        src={cl.imagem}
+                                    />
+                                    <p>{cl.categoria}</p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+                <s.ButtonCarousel className={'leftLst'}><i className={'fas fa-angle-left'}></i></s.ButtonCarousel>
+                <s.ButtonCarousel className={'rightLst'}><i className={'fas fa-angle-right'}></i></s.ButtonCarousel>
             </div>
         </>
     );
