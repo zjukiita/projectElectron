@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import Movies from '../../components/Movie';
 import api from '../../services/api';
 import path from 'path';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Carousel from 'react-multi-carousel';
 
 // Styled Components
 import * as s from './styles';
@@ -20,6 +20,14 @@ const Home = () => {
     const [childish, setChildish] = useState([]);
     const [adventure, setAdventure] = useState([]);
     const [shortFilm, setShortFilm] = useState([]);
+
+    const responsive = {
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 5,
+            paritialVisibilityGutter: 60
+        },
+    };
 
     // Funções de renderização das categorias de filme
 
@@ -71,7 +79,7 @@ const Home = () => {
     const loadingTragedy = useCallback(async () => {
         try {
             const response = await api.get('/filmes/categoria/Drama');
-            if(response.data) setTragedy(response.data)
+            if (response.data) setTragedy(response.data)
         } catch (error) {
             console.log('Falha no carregamento dos filmes de drama!')
         }
@@ -80,7 +88,7 @@ const Home = () => {
     const loadingClassic = useCallback(async () => {
         try {
             const response = await api.get('/filmes/categoria/Clássico');
-            if(response.data) setClassic(response.data)
+            if (response.data) setClassic(response.data)
         } catch (error) {
             console.log('Falha no carregamento dos filmes clássicos!')
         }
@@ -89,7 +97,7 @@ const Home = () => {
     const loadingRomance = useCallback(async () => {
         try {
             const response = await api.get('/filmes/categoria/Romance');
-            if(response.data) setRomance(response.data)
+            if (response.data) setRomance(response.data)
         } catch (error) {
             console.log('Falha no carregamento dos filmes de romance!')
         }
@@ -166,166 +174,159 @@ const Home = () => {
                 </Bs.Carousel.Item>
             </Bs.Carousel>
 
-            <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
-                <h2>Comédia</h2>
-                <div className={'MultiCarousel-inner'}>
-                    {comedy.map(c => {
-                        return (
-                            <div className={'item'} key={c.id}>
-                                <div className={'pad15'}>
-                                    <img
-                                        src={c.imagem}
-                                    />
-                                    <p>{c.categoria}</p>
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
-                <s.ButtonCarousel className={'leftLst'}><i className={'fas fa-angle-left'}></i></s.ButtonCarousel>
-                <s.ButtonCarousel className={'rightLst'}><i className={'fas fa-angle-right'}></i></s.ButtonCarousel>
-            </div>
+            <Carousel
+                ssr
+                partialVisibile
+                deviceType={"desktop"}
+                itemClass="image-item"
+                responsive={responsive}
+            >
+                {comedy.map(c => {
+                    return (
+                        <img
+                            key={c.id} src={c.imagem}
+                        />
+                    );
+                })}
+            </Carousel>
 
-            <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
-                <h2>Aventura</h2>
-                <div className={'MultiCarousel-inner'}>
-                    {adventure.map(ad => {
-                        return (
-                            <div className={'item'} key={ad.id}>
-                                <div className={'pad15'}>
-                                    <img
-                                        src={ad.imagem}
-                                    />
-                                    <p>{ad.categoria}</p>
-                                </div>
+            <Carousel
+                ssr
+                partialVisibile
+                deviceType={"desktop"}
+                itemClass="image-item"
+                responsive={responsive}
+            >
+                {adventure.map(ad => {
+                    return (
+                        <div className={'item'} key={ad.id}>
+                            <div className={'pad15'}>
+                                <img
+                                    src={ad.imagem}
+                                />
+                                <p>{ad.categoria}</p>
                             </div>
-                        );
-                    })}
-                </div>
-                <s.ButtonCarousel className={'leftLst'}><i className={'fas fa-angle-left'}></i></s.ButtonCarousel>
-                <s.ButtonCarousel className={'rightLst'}><i className={'fas fa-angle-right'}></i></s.ButtonCarousel>
-            </div>
-
-            <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
-                <h2>Terror</h2>
-                <div className={'MultiCarousel-inner'}>
-                    {terror.map(t => {
-                        return (
-                            <div className={'item'} key={t.id}>
-                                <div className={'pad15'}>
-                                    <img
-                                        src={t.imagem}
-                                    />
-                                    <p>{t.categoria}</p>
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
-                <s.ButtonCarousel className={'leftLst'}><i className={'fas fa-angle-left'}></i></s.ButtonCarousel>
-                <s.ButtonCarousel className={'rightLst'}><i className={'fas fa-angle-right'}></i></s.ButtonCarousel>
-            </div>
-
-            <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
-                <h2>Infantil</h2>
-                <div className={'MultiCarousel-inner'}>
-                    {childish.map(ch => {
-                        return (
-                            <div className={'item'} key={ch.id}>
-                                <div className={'pad15'}>
-                                    <img
-                                        src={ch.imagem}
-                                    />
-                                    <p>{ch.categoria}</p>
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
-                <s.ButtonCarousel className={'leftLst'}><i className={'fas fa-angle-left'}></i></s.ButtonCarousel>
-                <s.ButtonCarousel className={'rightLst'}><i className={'fas fa-angle-right'}></i></s.ButtonCarousel>
-            </div>
+                        </div>
+                    );
+                })}
+            </Carousel>
 
 
-            <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
-                <h2>Curta-Metragem</h2>
-                <div className={'MultiCarousel-inner'}>
-                    {shortFilm.map(sf => {
-                        return (
-                            <div className={'item'} key={sf.id}>
-                                <div className={'pad15'}>
-                                    <img
-                                        src={sf.imagem}
-                                    />
-                                    <p>{sf.categoria}</p>
-                                </div>
+            <Carousel
+                ssr
+                partialVisibile
+                deviceType={"desktop"}
+                itemClass="image-item"
+                responsive={responsive}
+            >
+                {terror.map(t => {
+                    return (
+                        <div className={'item'} key={t.id}>
+                            <div className={'pad15'}>
+                                <img
+                                    src={t.imagem}
+                                />
+                                <p>{t.categoria}</p>
                             </div>
-                        );
-                    })}
-                </div>
-                <s.ButtonCarousel className={'leftLst'}><i className={'fas fa-angle-left'}></i></s.ButtonCarousel>
-                <s.ButtonCarousel className={'rightLst'}><i className={'fas fa-angle-right'}></i></s.ButtonCarousel>
-            </div>
+                        </div>
+                    );
+                })}
+            </Carousel>
 
-            <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
-                <h2>Drama</h2>
-                <div className={'MultiCarousel-inner'}>
-                    {tragedy.map(d => {
-                        return (
-                            <div className={'item'} key={d.id}>
-                                <div className={'pad15'}>
-                                    <img
-                                        src={d.imagem}
-                                    />
-                                    <p>{d.categoria}</p>
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
-                <s.ButtonCarousel className={'leftLst'}><i className={'fas fa-angle-left'}></i></s.ButtonCarousel>
-                <s.ButtonCarousel className={'rightLst'}><i className={'fas fa-angle-right'}></i></s.ButtonCarousel>
-            </div>
+            <Carousel
+                ssr
+                partialVisibile
+                deviceType={"desktop"}
+                itemClass="image-item"
+                responsive={responsive}
+            >
+                {romance.map(r => {
+                    return (
+                        <div key={r.id}>
+                            <img
+                                src={r.imagem}
+                            />
+                            <p>{r.categoria}</p>
+                        </div>
+                    );
+                })}
+            </Carousel>
 
-            <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
-                <h2>Romance</h2>
-                <div className={'MultiCarousel-inner'}>
-                    {romance.map(r => {
-                        return (
-                            <div className={'item'} key={r.id}>
-                                <div className={'pad15'}>
-                                    <img
-                                        src={r.imagem}
-                                    />
-                                    <p>{r.categoria}</p>
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
-                <s.ButtonCarousel className={'leftLst'}><i className={'fas fa-angle-left'}></i></s.ButtonCarousel>
-                <s.ButtonCarousel className={'rightLst'}><i className={'fas fa-angle-right'}></i></s.ButtonCarousel>
-            </div>
+            <Carousel
+                ssr
+                partialVisibile
+                deviceType={"desktop"}
+                itemClass="image-item"
+                responsive={responsive}
+            >
+                {classic.map(cl => {
+                    return (
+                        <div key={cl.id}>
+                            <img
+                                src={cl.imagem}
+                            />
+                            <p>{cl.categoria}</p>
+                        </div>
+                    );
+                })}
+            </Carousel>
 
-            <div className={'MultiCarousel'} data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
-                <h2>Clássicos</h2>
-                <div className={'MultiCarousel-inner'}>
-                    {classic.map(cl => {
-                        return (
-                            <div className={'item'} key={cl.id}>
-                                <div className={'pad15'}>
-                                    <img
-                                        src={cl.imagem}
-                                    />
-                                    <p>{cl.categoria}</p>
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
-                <s.ButtonCarousel className={'leftLst'}><i className={'fas fa-angle-left'}></i></s.ButtonCarousel>
-                <s.ButtonCarousel className={'rightLst'}><i className={'fas fa-angle-right'}></i></s.ButtonCarousel>
-            </div>
+            <Carousel
+                ssr
+                partialVisibile
+                deviceType={"desktop"}
+                itemClass="image-item"
+                responsive={responsive}
+            >
+                {childish.map(ch => {
+                    return (
+                        <div key={ch.id}>
+                            <img
+                                src={ch.imagem}
+                            />
+                            <p>{ch.categoria}</p>
+                        </div>
+                    );
+                })}
+            </Carousel>
+
+            <Carousel
+                ssr
+                partialVisibile
+                deviceType={"desktop"}
+                itemClass="image-item"
+                responsive={responsive}
+            >
+                {tragedy.map(tr => {
+                    return (
+                        <div className={'item'} key={tr.id}>
+                            <img
+                                src={tr.imagem}
+                            />
+                            <p>{tr.categoria}</p>
+                        </div>
+                    );
+                })}
+            </Carousel>
+
+            <Carousel
+                ssr
+                partialVisibile
+                deviceType={"desktop"}
+                itemClass="image-item"
+                responsive={responsive}
+            >
+                {shortFilm.map(sf => {
+                    return (
+                        <div key={sf.id}>
+                            <img
+                                src={sf.imagem}
+                            />
+                            <p>{sf.categoria}</p>
+                        </div>
+                    );
+                })}
+            </Carousel>
         </>
     );
 };
