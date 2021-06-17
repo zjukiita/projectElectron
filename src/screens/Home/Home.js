@@ -97,13 +97,13 @@ const Home = () => {
 
     useEffect(() => {
         loadingComedy();
-        loadingAdventure();
         loadingTerror();
-        loadingChildish();
-        loadingShortFilm();
         loadingTragedy();
         loadingClassic();
         loadingRomance();
+        loadingChildish();
+        loadingAdventure();
+        loadingShortFilm();
     }, [loadingComedy, loadingAdventure, loadingTerror, loadingChildish, loadingShortFilm, loadingTragedy, loadingClassic, loadingRomance]);
 
     return (
