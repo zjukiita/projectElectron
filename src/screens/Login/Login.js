@@ -43,7 +43,8 @@ const Login = () => {
             });
             await schema.validate(data);
             const response = api.post('/users', data);
-            alert('Registro realizado com sucesso!');
+            await localStorage.setItem('users', response.data)
+                alert('Registro realizado com sucesso!');
             setModalShow(false);
         }
         catch (error) {

@@ -136,7 +136,6 @@ const FilmsCarousel = () => {
                 })}
             </Carousel>
 
-
             <Carousel
                 ssr
                 partialVisibile
