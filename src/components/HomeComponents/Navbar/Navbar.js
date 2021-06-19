@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import path from 'path';
 import { useHistory } from 'react-router-dom';
 
@@ -8,8 +8,10 @@ import { Dropdown, UserImg, Logo } from './styles'
 import { Navbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap';
 
 const NavbarComponent = () => {
-    const history = useHistory();
+    const [search, setSearch] = useState();
 
+    const history = useHistory();
+    
     return (
         <Navbar fixed="top" variant="dark">
             <Navbar.Brand href="#home"><Logo src={path.join(__dirname, '../../../assets/logo.png')} /></Navbar.Brand>
@@ -20,7 +22,11 @@ const NavbarComponent = () => {
                 <Nav.Link href="#pricing">Minha Lista</Nav.Link>
             </Nav>
             <Form inline>
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                <FormControl
+                    type="text"
+                    placeholder="Search"
+                    className="mr-sm-2"
+                />
                 <UserImg href="action2" />
                 <NavDropdown id="navbarScrollingDropdown">
                     <Dropdown>Meu Perfil</Dropdown>

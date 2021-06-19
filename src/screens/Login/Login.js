@@ -22,6 +22,8 @@ const Login = () => {
             });
             await schema.validate(data);
             const response = await api.post('/login', data);
+            localStorage.setItem('login', response.data)
+            console.log(response)
             history.push('/')
         }
         catch (error) {
