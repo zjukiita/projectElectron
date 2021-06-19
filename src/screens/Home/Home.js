@@ -21,6 +21,8 @@ const Home = () => {
     const [adventure, setAdventure] = useState([]);
     const [shortFilm, setShortFilm] = useState([]);
 
+    const [search, setSearch] = useState([]);
+
     const responsive = {
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
@@ -30,6 +32,10 @@ const Home = () => {
     };
 
     // Funções de renderização das categorias de filme
+
+    const loadingSearch = useCallback(async () => {
+        setComedy(comedy.filter(c => c.nome == search))
+    })
 
     const loadingComedy = useCallback(async () => {
         try {
@@ -104,6 +110,10 @@ const Home = () => {
     }, []);
 
     useEffect(() => {
+        loadingSearch();
+    }, [search]);
+
+    useEffect(() => {
         loadingComedy();
         loadingTerror();
         loadingTragedy();
@@ -125,7 +135,13 @@ const Home = () => {
                     <Bs.Nav.Link href="#pricing">Minha Lista</Bs.Nav.Link>
                 </Bs.Nav>
                 <Bs.Form inline>
-                    <Bs.FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                    <Bs.FormControl
+                        type="text"
+                        placeholder="Search"
+                        className="mr-sm-2"
+                        value={search}
+                        onChange={(e) => { setSearch(e.target.value) }}
+                    />
                     <s.UserImg href="action2" />
                     <Bs.NavDropdown id="navbarScrollingDropdown">
                         <Bs.NavDropdown.Item href="#action3">Meu Perfil</Bs.NavDropdown.Item>
@@ -201,6 +217,7 @@ const Home = () => {
                     return (
                         <div className={'item'} key={ad.id}>
                             <div className={'pad15'}>
+                                <p>{ad.nome}</p>
                                 <img
                                     src={ad.imagem}
                                 />

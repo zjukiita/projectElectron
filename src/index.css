@@ -30,15 +30,5 @@ body {
 }
 
 
-/* Multi Carousel Styles */
-
-/* .MultiCarousel { float: left; overflow: hidden; padding: 15px; width: 100%; position:relative; }
-.MultiCarousel .MultiCarousel-inner { transition: 1s ease all; float: left; }
-.MultiCarousel .MultiCarousel-inner .item { float: left;}
-.MultiCarousel .MultiCarousel-inner .item > div { text-align: center; padding:10px; margin:10px; color:#ffffff;}
-.MultiCarousel .leftLst, .MultiCarousel .rightLst { position:absolute; border-radius:50%;top:calc(47% - 20px); }
-.MultiCarousel .leftLst { left:10px; }
-.MultiCarousel .rightLst { right:10px; }
-.MultiCarousel .leftLst.over, .MultiCarousel .rightLst.over { display: none;} */
 
 
