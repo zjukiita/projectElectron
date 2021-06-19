@@ -3,8 +3,8 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 
 /* Screens */
 import Home from './Screens/Home';
-import Register from './Screens/Register';
 import Login from './Screens/Login';
+import Config from './Screens/Config';
 
 // Developers Screens
 
@@ -17,9 +17,9 @@ const App = () => {
         <HashRouter>
             <Switch>
                 <Route exact path="/" component={Home} />
-                <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
-
+                <Route path="/config" component={Config} />
+ 
                 {/* <Route exact path="/" component={DevHome}/>
                 <Route path="/DevMovies" component={DevMovies}/>
                 <Route path="/DevUsers" component={DevUsers}/> */}
