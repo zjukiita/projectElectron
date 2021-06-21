@@ -22,15 +22,16 @@ const Login = () => {
             });
             await schema.validate(data);
             const response = await api.post('/login', data);
-            localStorage.setItem('login', response.data)
-            console.log(response)
-            history.push('/')
+            const jsonData = JSON.stringify(response.data);
+            await localStorage.setItem('login', jsonData );
+            console.log(jsonData);
+            history.push('/');
         }
         catch (error) {
             if (error instanceof Yup.ValidationError) {
-                alert(`${error.message}`)
+                alert(`${error.message}`);
             };
-            alert('Credencias incorretas!')
+            alert('Credencias incorretas!');
         };
     }, []);
 
@@ -45,7 +46,6 @@ const Login = () => {
             });
             await schema.validate(data);
             const response = api.post('/users', data);
-            await localStorage.setItem('users', response.data)
                 alert('Registro realizado com sucesso!');
             setModalShow(false);
         }
