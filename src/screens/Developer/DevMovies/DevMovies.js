@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { Button } from './styles';
 import api from '../../../services/api';
-import MoviesDev from '../../../components/MoviesDev/index';
-import MoviesInfo from '../../../components/MoviesInfo/index';
+import MoviesDev from '../../../components/MoviesDev';
+import Modal from '../../../components/ModalDev';
 import GlobalMenuDev from '../../../components/GlobalMenuDev';
 
 const DevMovies = () => {
@@ -9,6 +10,9 @@ const DevMovies = () => {
     const [movie, setMovie] = useState([]);
     const [filter, setFilter] = useState([]);
     const [search, setSearch] = useState('');
+
+    const [modalVisible, setModalVisible] = useState(false);
+    const [selectedMovie, setSelectedMovie] = useState();
 
     const loadingMovies = useCallback(async () => {
         try {
@@ -41,35 +45,42 @@ const DevMovies = () => {
 
     const remove = async (id) => {
         let response;
-        response = await api.delete(`/filmes/${id}`)
+        response = await api.delete(`/filmes/${id}`);
+
     }
 
     return (
-        <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }} >
-            <GlobalMenuDev />
-            <div>
-                <form>
-                    <input
-                        type="text"
-                        id="search"
-                        name="search"
-                        onChange={e => setSearch(e.target.value)}
-                    />
-                </form>
-
-                {filter.map(m => {
-                    return (
-                        <div key={m.id}>
-                            <MoviesDev movie={m} />
-                            {/* <button onClick={() => remove(m.id) } >Deletar</button> */}
-                            <button>Deletar</button>
-                            <button>Editar</button>
-                        </div>
-                    );
-                })}
+        <>
+            <div style={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                height: "100vh",
+            }}>
+                <GlobalMenuDev />
+                <div>
+                    <form>
+                        <input
+                            type="text"
+                            id="search"
+                            name="search"
+                            onChange={e => setSearch(e.target.value)}
+                        />
+                    </form>
+                        <h1>Filmes</h1>
+                    {filter.map(m => {
+                        return (
+                            <div key={m.id}>
+                                <MoviesDev movie={m} />
+                                <Button onClick={() => { setSelectedMovie(m); setModalVisible(true); }}>Editar</Button>
+                                <Button onClick={() => remove(m.id)} >Deletar</Button>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
-        </div>
+            {modalVisible ? <Modal onClose={() => setModalVisible(false)} selectedMovie={selectedMovie} /> : null}
+        </>
     )
 }
-
 export default DevMovies;

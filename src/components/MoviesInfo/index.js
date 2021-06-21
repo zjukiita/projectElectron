@@ -1,19 +1,23 @@
 import React from 'react';
+import { P } from './styles';
 
 const MoviesInfo = ({ movie }) => {
     return (
-        <div>
-            <p>Id: {movie.id}</p>
-            <p>Filme: {movie.nome}</p>
-            <p>Filme: {movie.imagem}</p>
-            <p>Filme: {movie.sinopse}</p>
-            <p>Filme: {movie.duracao}</p>
-            <p>Filme: {movie.link}</p>
-            <p>Filme: {movie.avaliacao}</p>
-            <p>Filme: {movie.anoDeLancamento}</p>
-            <p>Filme: {movie.categoria}</p>
-            <p>Filme: {movie.classificacao}</p>
-        </div>
+        
+            <div>
+                <P>Id: {movie.id}</P>
+                <P>Filme: {movie.nome}</P>
+                <P>Imagem: {movie.imagem}</P>
+                <P>Sinopse: {movie.sinopse}</P>
+                <P>Duração: {movie.duracao}</P>
+                <P>Link: {movie.link}</P>
+                <P>Trailer: {movie.trailer}</P>
+                <P>Avaliação: {movie.avaliacao}</P>
+                <P>Ano de Lançamento: {movie.anoDeLancamento}</P>
+                <P>Categoria: {movie.categoria}</P>
+                <P>Clasificação: {movie.classificacao}</P>
+            </div>
+        
     );
 };
 
