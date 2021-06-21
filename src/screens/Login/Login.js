@@ -24,7 +24,6 @@ const Login = () => {
             const response = await api.post('/login', data);
             const jsonData = JSON.stringify(response.data);
             await localStorage.setItem('login', jsonData );
-            console.log(jsonData);
             history.push('/');
         }
         catch (error) {
