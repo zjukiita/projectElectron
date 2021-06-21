@@ -22,13 +22,15 @@ const Login = () => {
             });
             await schema.validate(data);
             const response = await api.post('/login', data);
-            history.push('/')
+            const jsonData = JSON.stringify(response.data);
+            await localStorage.setItem('login', jsonData );
+            history.push('/');
         }
         catch (error) {
             if (error instanceof Yup.ValidationError) {
-                alert(`${error.message}`)
+                alert(`${error.message}`);
             };
-            alert('Credencias incorretas!')
+            alert('Credencias incorretas!');
         };
     }, []);
 
@@ -43,7 +45,7 @@ const Login = () => {
             });
             await schema.validate(data);
             const response = api.post('/users', data);
-            alert('Registro realizado com sucesso!');
+                alert('Registro realizado com sucesso!');
             setModalShow(false);
         }
         catch (error) {
