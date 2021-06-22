@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button } from './styles';
-import api from '../../../services/api';
+import GlobalMenuDev from '../../../components/GlobalMenuDev';
 import MoviesDev from '../../../components/MoviesDev';
 import Modal from '../../../components/ModalDev';
-import GlobalMenuDev from '../../../components/GlobalMenuDev';
+import api from '../../../services/api';
+import { Button } from './styles';
 
 const DevMovies = () => {
 
@@ -75,7 +75,8 @@ const DevMovies = () => {
                 {filter.map(m => {
                     return (
                         <div key={m.id} style={{
-                            display: "flex"
+                            display: "flex",
+                            justifyContent: "space-between"
                         }}>
                             <div style={{
                                 cursor: "pointer",
