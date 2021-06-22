@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const MenuBar = styled.div`
-    background-color: #303030 ;
+    background-color: #841e8a ;
     width: 15%;
     height: 100%;
     position: fixed;

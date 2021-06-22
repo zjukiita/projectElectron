@@ -14,7 +14,7 @@ export const Modaal = styled.div`
 `;
 
 export const Container = styled.div`
-    background-color: #cccccc;
+    background-color: #424242;
     color: #000;
     width: 90%;
     height: 90%;
