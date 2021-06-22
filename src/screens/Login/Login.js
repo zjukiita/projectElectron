@@ -24,7 +24,7 @@ const Login = () => {
             const response = await api.post('/login', data);
             const jsonData = JSON.stringify(response.data);
             await localStorage.setItem('login', jsonData );
-            history.push('/');
+            history.push('/perfil');
         }
         catch (error) {
             if (error instanceof Yup.ValidationError) {

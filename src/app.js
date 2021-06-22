@@ -5,6 +5,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import Home from './Screens/Home';
 import Login from './Screens/Login';
 import Config from './Screens/Config';
+import Perfil from './Screens/Perfil';
 
 // Developers Screens
 
@@ -16,9 +17,10 @@ const App = () => {
     return (
         <HashRouter>
             <Switch>
-                <Route path="/login" component={Login} />
-                <Route exact path="/" component={Home} />
+                <Route path="/home" component={Home} />
+                <Route exact path="/" component={Login} />
                 <Route path="/config" component={Config} />
+                <Route path="/perfil" component={Perfil} />
 
                 {/* <Route exact path="/" component={DevHome}/>
                 <Route path="/DevMovies" component={DevMovies}/>

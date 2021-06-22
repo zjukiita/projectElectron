@@ -3,29 +3,24 @@ body {
     background-color: #666 !important ;
 }
 
-.dropdown-toggle {
+.nav-item .dropdown-toggle {
+    color: #000;
+}
+
+.nav-item .dropdown-toggle {
     margin-right: 150px;
-}
-
-/* Background da páginas Registro e Login! */
-.gALcbg {
-    background-image: url(./assets/bgRegister.jpg);
-}
-
-.cRfDjJ {
-    background-image: url(./assets/bgRegister.jpg)
 }
 
 /* Modal Styles */
 
 .modal-content {
-    background-color: rgba(0, 0, 0, 0) !important;
+    background-color: #00000000 !important;
 }
 
 .modal-body {
     border-radius: 8px;
     background-color: #363636;
-    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.591);
+    box-shadow: 10px 5px 5px #00000097;
 }
 
 .modal-body h2 {
