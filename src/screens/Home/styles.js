@@ -7,7 +7,7 @@ export const UserImg = styled.img`
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: #fff;
+    /* background-color: #fff; */
     border: 2px #000 solid;
 `
 export const Dropdown = styled.div`

@@ -13,6 +13,7 @@ import { Navbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap';
 
 const Home = () => {
     const [search, setSearch] = useState();
+    const [storage, setStorage] = useState({});
 
     const history = useHistory();
 
@@ -23,6 +24,15 @@ const Home = () => {
             paritialVisibilityGutter: 60
         },
     };
+
+    const getStorage = useCallback(async () => {
+        try {
+            const storage = await localStorage.getItem('img')
+            setStorage(JSON.parse(storage))
+        } catch (error) {
+            console.log(error)
+        }
+    }, []);
 
     const loadingSearch = useCallback(async () => {
         setComedy(comedy.filter(c => c.nome == search));
@@ -120,6 +130,10 @@ const Home = () => {
     }, []);
 
     useEffect(() => {
+        getStorage();
+    }, [getStorage])
+
+    useEffect(() => {
         loadingSearch();
     }, [loadingSearch]);
 
@@ -145,7 +159,7 @@ const Home = () => {
                         value={search}
                         onChange={(e) => { setSearch(e.target.value) }}
                     />
-                    <UserImg href="action2" />
+                    <UserImg href="action2" src={storage} />
                     <NavDropdown id="navbarScrollingDropdown">
                         <Dropdown>Meu Perfil</Dropdown>
                         <Dropdown>Favoritos</Dropdown>
