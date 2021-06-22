@@ -8,9 +8,8 @@ import MainCarousel from '../../components/HomeComponents/MainCarousel';
 import Carousel from 'react-multi-carousel';
 
 // Importações de estilos da Navbar
-import { Dropdown, UserImg, Logo } from './styles';
+import { Dropdown, UserImg, Logo, BgImage, Title, BgHover } from './styles';
 import { Navbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap';
-
 
 const Home = () => {
     const [search, setSearch] = useState();
@@ -161,9 +160,11 @@ const Home = () => {
             >
                 {comedy.map(c => {
                     return (
-                        <img
-                            key={c.id} src={c.imagem}
-                        />
+                        <BgImage key={c.id} style={{ backgroundImage: `url(${c.imagem})` }}>
+                            <BgHover>
+                                <Title>{c.nome}</Title>
+                            </BgHover>
+                        </BgImage>
                     );
                 })}
             </Carousel>
@@ -177,14 +178,11 @@ const Home = () => {
             >
                 {adventure.map(ad => {
                     return (
-                        <div className={'item'} key={ad.id}>
-                            <div className={'pad15'}>
-                                <img
-                                    src={ad.imagem}
-                                />
-                                <p>{ad.categoria}</p>
-                            </div>
-                        </div>
+                        <BgImage key={ad.id} style={{ backgroundImage: `url(${ad.imagem})` }}>
+                            <BgHover>
+                                <Title>{ad.nome}</Title>
+                            </BgHover>
+                        </BgImage>
                     );
                 })}
             </Carousel>
@@ -198,14 +196,11 @@ const Home = () => {
             >
                 {terror.map(t => {
                     return (
-                        <div className={'item'} key={t.id}>
-                            <div className={'pad15'}>
-                                <img
-                                    src={t.imagem}
-                                />
-                                <p>{t.categoria}</p>
-                            </div>
-                        </div>
+                        <BgImage key={t.id} style={{ backgroundImage: `url(${t.imagem})` }}>
+                            <BgHover>
+                                <Title>{t.nome}</Title>
+                            </BgHover>
+                        </BgImage>
                     );
                 })}
             </Carousel>
@@ -219,12 +214,11 @@ const Home = () => {
             >
                 {romance.map(r => {
                     return (
-                        <div key={r.id}>
-                            <img
-                                src={r.imagem}
-                            />
-                            <p>{r.categoria}</p>
-                        </div>
+                        <BgImage key={r.id} style={{ backgroundImage: `url(${r.imagem})` }}>
+                            <BgHover>
+                                <Title>{r.nome}</Title>
+                            </BgHover>
+                        </BgImage>
                     );
                 })}
             </Carousel>
@@ -238,12 +232,11 @@ const Home = () => {
             >
                 {classic.map(cl => {
                     return (
-                        <div key={cl.id}>
-                            <img
-                                src={cl.imagem}
-                            />
-                            <p>{cl.categoria}</p>
-                        </div>
+                        <BgImage key={cl.id} style={{ backgroundImage: `url(${cl.imagem})` }}>
+                            <BgHover>
+                                <Title>{cl.nome}</Title>
+                            </BgHover>
+                        </BgImage>
                     );
                 })}
             </Carousel>
@@ -257,12 +250,11 @@ const Home = () => {
             >
                 {childish.map(ch => {
                     return (
-                        <div key={ch.id}>
-                            <img
-                                src={ch.imagem}
-                            />
-                            <p>{ch.categoria}</p>
-                        </div>
+                        <BgImage key={ch.id} style={{ backgroundImage: `url(${ch.imagem})` }}>
+                            <BgHover>
+                                <Title>{ch.nome}</Title>
+                            </BgHover>
+                        </BgImage>
                     );
                 })}
             </Carousel>
@@ -276,12 +268,11 @@ const Home = () => {
             >
                 {tragedy.map(tr => {
                     return (
-                        <div className={'item'} key={tr.id}>
-                            <img
-                                src={tr.imagem}
-                            />
-                            <p>{tr.categoria}</p>
-                        </div>
+                        <BgImage key={tr.id} style={{ backgroundImage: `url(${tr.imagem})` }}>
+                            <BgHover>
+                                <Title>{tr.nome}</Title>
+                            </BgHover>
+                        </BgImage>
                     );
                 })}
             </Carousel>
@@ -295,12 +286,11 @@ const Home = () => {
             >
                 {shortFilm.map(sf => {
                     return (
-                        <div key={sf.id}>
-                            <img
-                                src={sf.imagem}
-                            />
-                            <p>{sf.categoria}</p>
-                        </div>
+                        <BgImage key={sf.id} style={{ backgroundImage: `url(${sf.imagem})` }}>
+                            <BgHover>
+                                <Title>{sf.nome}</Title>
+                            </BgHover>
+                        </BgImage>
                     );
                 })}
             </Carousel>

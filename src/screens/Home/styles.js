@@ -21,6 +21,27 @@ export const Dropdown = styled.div`
         cursor: pointer;
     }
 `
+export const BgHover = styled.div`
+    width: 200px;
+    height: 280px;
+    opacity: 0;
+    transition: 0.8s;
+`
+export const BgImage = styled.div`
+    width: 200px;
+    height: 280px;
+    text-align: center;
+
+    &:hover ${BgHover} {
+        opacity: 1;
+        background-color: rgba(21, 21, 21, 0.950);
+    }
+`
+export const Title = styled.h3`
+    color: #fff;
+    font-size: 20px;
+    font-weight: 300;
+`
 
 
 
