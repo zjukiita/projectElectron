@@ -9,6 +9,7 @@ import { ImgProfile } from './styles'
 const Config = () => {
 
     const [storage, setStorage] = useState({});
+    const [imgStorage, setImgStorage] = useState();
 
     const profilePicture = () => {
         const pictures = [
@@ -39,8 +40,10 @@ const Config = () => {
 
     const getStorage = useCallback(async () => {
         try {
-            const storage = await localStorage.getItem('login')
-            setStorage(JSON.parse(storage))
+            const storage = await localStorage.getItem('login');
+            setStorage(JSON.parse(storage));
+            const imgStorage = await localStorage.getItem('img');
+            setImgStorage(JSON.parse(imgStorage));
             console.log(storage)
         } catch (error) {
             console.log(error)
@@ -54,7 +57,7 @@ const Config = () => {
     return (
         <>
 
-            <ImgProfile src={profilePicture()} />
+            <ImgProfile src={imgStorage} />
             <h3>Nome: {storage.nomeCompleto}</h3>
             <h3>Email: {storage.email}</h3>
             <h3>Nome de usuário: {storage.usuario}</h3>
