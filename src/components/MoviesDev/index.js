@@ -3,9 +3,7 @@ import { P } from './styles';
 
 const MoviesDev = ({ movie }) => {
     return (
-        <div>
-            <P>{movie.nome}</P>
-        </div>
+        <P>{movie.nome}</P>
     );
 };
 

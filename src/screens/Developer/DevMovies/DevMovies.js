@@ -52,43 +52,52 @@ const DevMovies = () => {
 
     return (
         <>
+            <GlobalMenuDev />
             <div style={{
-                display: "flex",
-                flexDirection: "row-reverse",
-                flexWrap: "wrap"
-            }}>
-                <GlobalMenuDev />
-                <div style={{ width: '83vw', paddingTop: "30px" }} >
-                    <form>
-                        <input
-                            size="50"
-                            type="text"
-                            id="search"
-                            name="search"
-                            placeholder="Pesquisar Filme"
-                            onChange={e => setSearch(e.target.value)}
-                        />
-                    </form>
+                width: "85%",
+                height: "100%",
+                marginLeft: "15%",
+            }} >
+                <form>
+                    <input
+                        style={{
+                            width: "100%",
+                            height: "3vw"
+                        }}
+                        type="text"
+                        id="search"
+                        name="search"
+                        placeholder="Pesquisar Filme"
+                        onChange={e => setSearch(e.target.value)}
+                    />
+                </form>
 
-                    {filter.map(m => {
-                        return (
-                            <div key={m.id} style={{
-                                paddingTop: '15px',
-                                paddingBottom: '15px',
-                                display: 'flex',
-                                alignItems: 'center'
-                            }}>
+                {filter.map(m => {
+                    return (
+                        <div key={m.id} style={{
+                            display: "flex"
+                        }}>
+                            <div style={{
+                                cursor: "pointer",
+                                marginTop: "15px",
+                                marginBottom: "15px"
+                            }} onClick={() => { setSelectedMovie(m); setModalVisible(true); }} >
                                 <MoviesDev movie={m} />
-                                <Button onClick={() => { setSelectedMovie(m); setModalVisible(true); }}>Editar</Button>
-                                <Button onClick={() => remove(m.id)} >Deletar</Button>
                             </div>
-                        );
-                    })}
-
-                </div>
+                            <div style={{
+                                display: 'flex',
+                                justifyItems: 'center',
+                                alignItems: "center",
+                            }}>
+                                <Button>Deletar</Button>
+                            </div>
+                            {/* onClick={() => remove(m.id)} */}
+                        </div>
+                    );
+                })}
             </div>
             {modalVisible ? <Modal onClose={() => setModalVisible(false)} selectedMovie={selectedMovie} /> : null}
         </>
-    )
+    );
 }
 export default DevMovies;
