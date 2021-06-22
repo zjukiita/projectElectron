@@ -14,7 +14,7 @@ const Modal = ({ id = 'mod', onClose = () => { }, selectedMovie }) => {
                 <Close onClick={onClose} />
                 <div>
                     <MoviesInfo movie={selectedMovie} />
-                    <button onClick={} >Editar</button>
+                    <button>Editar</button>
                 </div>
             </Container>
         </Modaal>
