@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { ImgProfile } from './styles';
 
 const Perfil = () => {
+    const history = useHistory();
 
     const [storage, setStorage] = useState({});
 
@@ -50,6 +51,7 @@ const Perfil = () => {
                         <button onClick={
                             () => {
                                 localStorage.setItem('img', JSON.stringify(p.link))
+                                history.push("/home")
                                 console.log(`Imagem ${p.id} salvada!`)
                             }
                         }>Select This Image</button>
