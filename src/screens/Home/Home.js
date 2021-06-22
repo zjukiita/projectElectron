@@ -8,7 +8,7 @@ import MainCarousel from '../../components/HomeComponents/MainCarousel';
 import Carousel from 'react-multi-carousel';
 
 // Importações de estilos da Navbar
-import { Dropdown, UserImg, Logo, BgImage, Title, BgHover } from './styles';
+import { Dropdown, UserImg, Logo, BgImage, Title, BgHover, CategorySection } from './styles';
 import { Navbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap';
 
 const Home = () => {
@@ -172,26 +172,29 @@ const Home = () => {
             </Navbar>
 
             <MainCarousel />
-
-            <Carousel
-                ssr
-                partialVisibile
-                deviceType={"desktop"}
-                itemClass="image-item"
-                responsive={responsive}
-            >
-                {action.map(sf => {
-                    return (
-                        <BgImage key={a.id} style={{ backgroundImage: `url(${a.imagem})` }}>
-                            <BgHover>
-                                <Title>{a.nome}</Title>
-                            </BgHover>
-                        </BgImage>
-                    );
-                })}
-            </Carousel>
-
-            <Carousel
+            <CategorySection>
+                <Title>Ação</Title>
+                <Carousel
+                    ssr
+                    partialVisibile
+                    deviceType={"desktop"}
+                    itemClass="image-item"
+                    responsive={responsive}
+                >
+                    {action.map(a => {
+                        return (
+                            <BgImage key={a.id} style={{ backgroundImage: `url(${a.imagem})` }}>
+                                <BgHover>
+                                    <Title>{a.nome}</Title>
+                                </BgHover>
+                            </BgImage>
+                        );
+                    })}
+                </Carousel>
+            </CategorySection>
+            <CategorySection>
+                <Title>Comédia</Title>
+            <Carousel          
                 ssr
                 partialVisibile
                 deviceType={"desktop"}
@@ -208,7 +211,9 @@ const Home = () => {
                     );
                 })}
             </Carousel>
-
+            </CategorySection>
+            <CategorySection>
+                <Title>Aventura</Title>
             <Carousel
                 ssr
                 partialVisibile
@@ -226,7 +231,9 @@ const Home = () => {
                     );
                 })}
             </Carousel>
-
+            </CategorySection>
+            <CategorySection>
+                <Title>Terror</Title>
             <Carousel
                 ssr
                 partialVisibile
@@ -244,7 +251,9 @@ const Home = () => {
                     );
                 })}
             </Carousel>
-
+            </CategorySection>
+            <CategorySection>
+                <Title>Romance</Title>
             <Carousel
                 ssr
                 partialVisibile
@@ -262,7 +271,9 @@ const Home = () => {
                     );
                 })}
             </Carousel>
-
+            </CategorySection>
+            <CategorySection>
+                <Title>Clássico</Title>
             <Carousel
                 ssr
                 partialVisibile
@@ -280,7 +291,9 @@ const Home = () => {
                     );
                 })}
             </Carousel>
-
+            </CategorySection>
+            <CategorySection>
+                <Title>Infantil</Title>
             <Carousel
                 ssr
                 partialVisibile
@@ -298,7 +311,9 @@ const Home = () => {
                     );
                 })}
             </Carousel>
-
+            </CategorySection>
+            <CategorySection>
+                <Title>Tragédia</Title>
             <Carousel
                 ssr
                 partialVisibile
@@ -316,7 +331,9 @@ const Home = () => {
                     );
                 })}
             </Carousel>
-
+            </CategorySection>
+            <CategorySection>
+                <Title>Curta-Metragem</Title>
             <Carousel
                 ssr
                 partialVisibile
@@ -334,6 +351,7 @@ const Home = () => {
                     );
                 })}
             </Carousel>
+            </CategorySection>
         </>
     );
 };
