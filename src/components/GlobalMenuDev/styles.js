@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 export const MenuBar = styled.div`
     background-color: #303030 ;
-    width: 17vw;
+    width: 15vw;
     height: 100%;
-    padding-left: 10px;
-    padding-top: 15px;
+    position: fixed;
+    left: 0;
 `;
 
 export const Color = styled.div`

@@ -3,7 +3,7 @@ import { P } from './styles';
 
 const MoviesDev = ({ movie }) => {
     return (
-        <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+        <div>
             <P>{movie.nome}</P>
         </div>
     );

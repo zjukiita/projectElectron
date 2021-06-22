@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const P = styled.p`
-    margin: initial;
-    margin-top: 15px;
-    font-size: 5vh;
+    font-size: 2vw;
     color: #fff;
 `;

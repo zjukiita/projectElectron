@@ -44,39 +44,47 @@ const DevMovies = () => {
     }, [handleSearch]);
 
     const remove = async (id) => {
-        let response;
-        response = await api.delete(`/filmes/${id}`);
-
-    }
+        const result = filter.filter(m => m.id !== id);
+        setMovie(movie.filter(m => m.id !== id));
+        setFilter(result);
+        await api.delete(`/filmes/${id}`);
+    };
 
     return (
         <>
             <div style={{
                 display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                height: "100vh",
+                flexDirection: "row-reverse",
+                flexWrap: "wrap"
             }}>
                 <GlobalMenuDev />
-                <div>
+                <div style={{ width: '83vw', paddingTop: "30px" }} >
                     <form>
                         <input
+                            size="50"
                             type="text"
                             id="search"
                             name="search"
+                            placeholder="Pesquisar Filme"
                             onChange={e => setSearch(e.target.value)}
                         />
                     </form>
-                        <h1>Filmes</h1>
+
                     {filter.map(m => {
                         return (
-                            <div key={m.id}>
+                            <div key={m.id} style={{
+                                paddingTop: '15px',
+                                paddingBottom: '15px',
+                                display: 'flex',
+                                alignItems: 'center'
+                            }}>
                                 <MoviesDev movie={m} />
                                 <Button onClick={() => { setSelectedMovie(m); setModalVisible(true); }}>Editar</Button>
                                 <Button onClick={() => remove(m.id)} >Deletar</Button>
                             </div>
                         );
                     })}
+
                 </div>
             </div>
             {modalVisible ? <Modal onClose={() => setModalVisible(false)} selectedMovie={selectedMovie} /> : null}
