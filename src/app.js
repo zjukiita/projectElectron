@@ -16,8 +16,8 @@ const App = () => {
     return (
         <HashRouter>
             <Switch>
-                <Route path="/login" component={Login} />
-                <Route exact path="/" component={Home} />
+                <Route exact path="/" component={Login} />
+                <Route path="/home" component={Home} />
                 <Route path="/config" component={Config} />
 
                 {/* <Route exact path="/" component={DevHome}/>

@@ -4,8 +4,7 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 
 // Estilos
-import { ImgProfile, Info } from './styles'
-import { Container } from 'react-bootstrap'
+import { ImgProfile } from './styles'
 
 const Config = () => {
 
@@ -55,23 +54,23 @@ const Config = () => {
     return (
         <>
 
-            <img src={profilePicture()} />
-            <h3>Nome: Name Example</h3>
-            <h3>Email: Example@gmail.com</h3>
-            <h3>Password: Hidden</h3>
-            <Link to="/login">Voltar ao login</Link>
+            <ImgProfile src={profilePicture()} />
+            <h3>Nome: {storage.nomeCompleto}</h3>
+            <h3>Email: {storage.email}</h3>
+            <h3>Nome de usuário: {storage.usuario}</h3>
+            <Link to="/home">Voltar a home</Link>
 
             <Formik
                 enableReinitialize
                 onSubmit={handleUpdate}
                 initialValues={{
                     senha: '',
-                    email: 'Example@gmail.com',
+                    email: storage.email,
                 }}
             >
                 {({ handleSubmit, values, setFieldValue, handleChange, handleBlur }) => (
                     <>
-                        <h2>Login</h2>
+                        <h2>Atualização de informações</h2>
 
                         <div>
                             <input

@@ -28,6 +28,7 @@ const Home = () => {
         setComedy(comedy.filter(c => c.nome == search));
     }, [search])
 
+    const [action, setAction] = useState([]);
     const [comedy, setComedy] = useState([]);
     const [terror, setTerror] = useState([]);
     const [tragedy, setTragedy] = useState([]);
@@ -37,12 +38,21 @@ const Home = () => {
     const [adventure, setAdventure] = useState([]);
     const [shortFilm, setShortFilm] = useState([]);
 
+    const loadingAction = useCallback(async () => {
+        try {
+            const response = await api.get('/filmes/categoria/Ação');
+            if (response.data) setAction(response.data);
+        } catch (error) {
+            console.log('Falha no carregamento dos filmes de ação!');
+        }
+    }, []);
+
     const loadingComedy = useCallback(async () => {
         try {
             const response = await api.get('/filmes/categoria/Comédia');
             if (response.data) setComedy(response.data);
         } catch (error) {
-            console.log('Falha no carregamento dos filmes de comédia!')
+            console.log('Falha no carregamento dos filmes de comédia!');
         }
     }, []);
 
@@ -51,7 +61,7 @@ const Home = () => {
             const response = await api.get('/filmes/categoria/Aventura');
             if (response.data) setAdventure(response.data);
         } catch (error) {
-            console.log('Falha no carregamento dos filmes de aventura!')
+            console.log('Falha no carregamento dos filmes de aventura!');
         }
     }, []);
 
@@ -60,7 +70,7 @@ const Home = () => {
             const response = await api.get('/filmes/categoria/Terror');
             if (response.data) setTerror(response.data);
         } catch (error) {
-            console.log('Falha no carregamento dos filmes de terror!')
+            console.log('Falha no carregamento dos filmes de terror!');
         }
     }, []);
 
@@ -69,16 +79,16 @@ const Home = () => {
             const response = await api.get('/filmes/categoria/Infantil');
             if (response.data) setChildish(response.data);
         } catch (error) {
-            console.log('Falha no carregamento dos filmes infantis!')
+            console.log('Falha no carregamento dos filmes infantis!');
         }
     }, []);
 
     const loadingShortFilm = useCallback(async () => {
         try {
-            const response = await api.get('/filmes/categoria/Curta-Metragem')
+            const response = await api.get('/filmes/categoria/Curta-Metragem');
             if (response.data) setShortFilm(response.data)
         } catch (error) {
-            console.log('Falha no carregamento dos filmes de curta-metragem!')
+            console.log('Falha no carregamento dos filmes de curta-metragem!');
         }
     }, []);
 
@@ -87,7 +97,7 @@ const Home = () => {
             const response = await api.get('/filmes/categoria/Drama');
             if (response.data) setTragedy(response.data)
         } catch (error) {
-            console.log('Falha no carregamento dos filmes de drama!')
+            console.log('Falha no carregamento dos filmes de drama!');
         }
     }, []);
 
@@ -96,7 +106,7 @@ const Home = () => {
             const response = await api.get('/filmes/categoria/Clássico');
             if (response.data) setClassic(response.data)
         } catch (error) {
-            console.log('Falha no carregamento dos filmes clássicos!')
+            console.log('Falha no carregamento dos filmes clássicos!');
         }
     }, []);
 
@@ -105,7 +115,7 @@ const Home = () => {
             const response = await api.get('/filmes/categoria/Romance');
             if (response.data) setRomance(response.data)
         } catch (error) {
-            console.log('Falha no carregamento dos filmes de romance!')
+            console.log('Falha no carregamento dos filmes de romance!');
         }
     }, []);
 
@@ -113,11 +123,9 @@ const Home = () => {
         loadingSearch();
     }, [loadingSearch]);
 
-
     useEffect(() => {
-        loadingComedy(); loadingTerror(); loadingTragedy(); loadingClassic(); loadingRomance(); loadingChildish(); loadingAdventure(); loadingShortFilm();
-    }, [loadingComedy, loadingAdventure, loadingTerror, loadingChildish, loadingShortFilm, loadingTragedy, loadingClassic, loadingRomance]);
-
+        loadingAction(), loadingComedy(); loadingTerror(); loadingTragedy(); loadingClassic(); loadingRomance(); loadingChildish(); loadingAdventure(); loadingShortFilm();
+    }, [loadingAction, loadingComedy, loadingAdventure, loadingTerror, loadingChildish, loadingShortFilm, loadingTragedy, loadingClassic, loadingRomance]);
 
     return (
         <>
@@ -144,12 +152,30 @@ const Home = () => {
                         <Dropdown>Trocar Perfil</Dropdown>
                         <Dropdown onClick={() => history.push('/config')}>Configurações</Dropdown>
                         <NavDropdown.Divider />
-                        <Dropdown onClick={() => history.push('/login')}>Sair</Dropdown>
+                        <Dropdown onClick={() => history.push('/')}>Sair</Dropdown>
                     </NavDropdown>
                 </Form>
             </Navbar>
 
             <MainCarousel />
+
+            <Carousel
+                ssr
+                partialVisibile
+                deviceType={"desktop"}
+                itemClass="image-item"
+                responsive={responsive}
+            >
+                {action.map(sf => {
+                    return (
+                        <BgImage key={a.id} style={{ backgroundImage: `url(${a.imagem})` }}>
+                            <BgHover>
+                                <Title>{a.nome}</Title>
+                            </BgHover>
+                        </BgImage>
+                    );
+                })}
+            </Carousel>
 
             <Carousel
                 ssr
