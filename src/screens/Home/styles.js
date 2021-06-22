@@ -38,9 +38,13 @@ export const BgImage = styled.div`
     }
 `
 export const Title = styled.h3`
-    color: #fff;
+    color: #9f6ff2;
     font-size: 20px;
     font-weight: 300;
+`
+export const CategorySection = styled.div`
+   margin-left: 6px;
+   margin-top: 20px;
 `
 
 
