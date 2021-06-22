@@ -149,7 +149,7 @@ const Home = () => {
                     <NavDropdown id="navbarScrollingDropdown">
                         <Dropdown>Meu Perfil</Dropdown>
                         <Dropdown>Favoritos</Dropdown>
-                        <Dropdown>Trocar Perfil</Dropdown>
+                        <Dropdown onClick={() => history.push('/perfil')}>Trocar Perfil</Dropdown>
                         <Dropdown onClick={() => history.push('/config')}>Configurações</Dropdown>
                         <NavDropdown.Divider />
                         <Dropdown onClick={() => history.push('/')}>Sair</Dropdown>
