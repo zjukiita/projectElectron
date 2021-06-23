@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
 import path from 'path';
 
@@ -8,15 +8,11 @@ import MainCarousel from '../../components/HomeComponents/MainCarousel';
 import Carousel from 'react-multi-carousel';
 
 // Importações de estilos da Navbar
-import { Dropdown, UserImg, Logo, BgImage, Title, BgHover, CategorySection } from './styles';
+import { Dropdown, UserImg, Logo, BgImage, Title, BgHover, CategorySection, Star } from './styles';
 import { Navbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap';
 
 const Home = () => {
-    const [search, setSearch] = useState();
-    const [storage, setStorage] = useState({});
-
     const history = useHistory();
-
     const responsive = {
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
@@ -25,18 +21,8 @@ const Home = () => {
         },
     };
 
-    const getStorage = useCallback(async () => {
-        try {
-            const storage = await localStorage.getItem('img')
-            setStorage(JSON.parse(storage))
-        } catch (error) {
-            console.log(error)
-        }
-    }, []);
-
-    const loadingSearch = useCallback(async () => {
-        setComedy(comedy.filter(c => c.nome == search));
-    }, [search])
+    const [search, setSearch] = useState();
+    const [storage, setStorage] = useState({});
 
     const [action, setAction] = useState([]);
     const [comedy, setComedy] = useState([]);
@@ -47,6 +33,35 @@ const Home = () => {
     const [childish, setChildish] = useState([]);
     const [adventure, setAdventure] = useState([]);
     const [shortFilm, setShortFilm] = useState([]);
+
+    const getStorage = useCallback(async () => {
+        try {
+            const storage = await localStorage.getItem('img')
+            setStorage(JSON.parse(storage))
+        } catch (error) {
+            console.log(error)
+        }
+    }, []);
+
+    // Array de teste
+    const Categorias = [
+        {
+            categoria: 'Ação'
+        },
+        {
+            categoria: 'Aventura'
+        },
+        {
+            categoria: 'Comédia'
+        },
+        {
+            categoria: 'Romance'
+        }
+    ];
+
+    const loadingSearch = useCallback(async () => {
+        setComedy(comedy.filter(c => c.nome == search));
+    }, [search])
 
     const loadingAction = useCallback(async () => {
         try {
@@ -146,10 +161,21 @@ const Home = () => {
             <Navbar fixed="top" variant="dark">
                 <Navbar.Brand href="#home"><Logo src={path.join(__dirname, '../../assets/logo.png')} /></Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Nav.Link href="#home">Início</Nav.Link>
-                    <Nav.Link href="#features">Filmes</Nav.Link>
-                    <Nav.Link href="#pricing">Lançamentos</Nav.Link>
+                    <Nav.Link href="#">Início</Nav.Link>
+                    <Nav.Link href="#">Filmes</Nav.Link>
                     <Nav.Link href="#pricing">Minha Lista</Nav.Link>
+                    <NavDropdown title="Categorias" id="basic-nav-dropdown">
+                        {Categorias.map(c => {
+                            return (
+                                <Dropdown key={c.categoria} onClick={() => {
+                                    localStorage.setItem('category', JSON.stringify(c.categoria));
+                                    history.push('/categoria');
+                                }}>
+                                    {c.categoria}
+                                </Dropdown>
+                            );
+                        })}
+                    </NavDropdown>
                 </Nav>
                 <Form inline>
                     <FormControl
@@ -159,7 +185,7 @@ const Home = () => {
                         value={search}
                         onChange={(e) => { setSearch(e.target.value) }}
                     />
-                    <UserImg href="action2" src={storage} />
+                    <UserImg href="action2" src={storage || ''} />
                     <NavDropdown id="navbarScrollingDropdown">
                         <Dropdown>Meu Perfil</Dropdown>
                         <Dropdown>Favoritos</Dropdown>
@@ -186,6 +212,7 @@ const Home = () => {
                             <BgImage key={a.id} style={{ backgroundImage: `url(${a.imagem})` }}>
                                 <BgHover>
                                     <Title>{a.nome}</Title>
+                                    <button><i className={'fas fa-star'}></i></button>
                                 </BgHover>
                             </BgImage>
                         );
@@ -194,163 +221,163 @@ const Home = () => {
             </CategorySection>
             <CategorySection>
                 <Title>Comédia</Title>
-            <Carousel          
-                ssr
-                partialVisibile
-                deviceType={"desktop"}
-                itemClass="image-item"
-                responsive={responsive}
-            >
-                {comedy.map(c => {
-                    return (
-                        <BgImage key={c.id} style={{ backgroundImage: `url(${c.imagem})` }}>
-                            <BgHover>
-                                <Title>{c.nome}</Title>
-                            </BgHover>
-                        </BgImage>
-                    );
-                })}
-            </Carousel>
+                <Carousel
+                    ssr
+                    partialVisibile
+                    deviceType={"desktop"}
+                    itemClass="image-item"
+                    responsive={responsive}
+                >
+                    {comedy.map(c => {
+                        return (
+                            <BgImage key={c.id} style={{ backgroundImage: `url(${c.imagem})` }}>
+                                <BgHover>
+                                    <Title>{c.nome}</Title>
+                                </BgHover>
+                            </BgImage>
+                        );
+                    })}
+                </Carousel>
             </CategorySection>
             <CategorySection>
                 <Title>Aventura</Title>
-            <Carousel
-                ssr
-                partialVisibile
-                deviceType={"desktop"}
-                itemClass="image-item"
-                responsive={responsive}
-            >
-                {adventure.map(ad => {
-                    return (
-                        <BgImage key={ad.id} style={{ backgroundImage: `url(${ad.imagem})` }}>
-                            <BgHover>
-                                <Title>{ad.nome}</Title>
-                            </BgHover>
-                        </BgImage>
-                    );
-                })}
-            </Carousel>
+                <Carousel
+                    ssr
+                    partialVisibile
+                    deviceType={"desktop"}
+                    itemClass="image-item"
+                    responsive={responsive}
+                >
+                    {adventure.map(ad => {
+                        return (
+                            <BgImage key={ad.id} style={{ backgroundImage: `url(${ad.imagem})` }}>
+                                <BgHover>
+                                    <Title>{ad.nome}</Title>
+                                </BgHover>
+                            </BgImage>
+                        );
+                    })}
+                </Carousel>
             </CategorySection>
             <CategorySection>
                 <Title>Terror</Title>
-            <Carousel
-                ssr
-                partialVisibile
-                deviceType={"desktop"}
-                itemClass="image-item"
-                responsive={responsive}
-            >
-                {terror.map(t => {
-                    return (
-                        <BgImage key={t.id} style={{ backgroundImage: `url(${t.imagem})` }}>
-                            <BgHover>
-                                <Title>{t.nome}</Title>
-                            </BgHover>
-                        </BgImage>
-                    );
-                })}
-            </Carousel>
+                <Carousel
+                    ssr
+                    partialVisibile
+                    deviceType={"desktop"}
+                    itemClass="image-item"
+                    responsive={responsive}
+                >
+                    {terror.map(t => {
+                        return (
+                            <BgImage key={t.id} style={{ backgroundImage: `url(${t.imagem})` }}>
+                                <BgHover>
+                                    <Title>{t.nome}</Title>
+                                </BgHover>
+                            </BgImage>
+                        );
+                    })}
+                </Carousel>
             </CategorySection>
             <CategorySection>
                 <Title>Romance</Title>
-            <Carousel
-                ssr
-                partialVisibile
-                deviceType={"desktop"}
-                itemClass="image-item"
-                responsive={responsive}
-            >
-                {romance.map(r => {
-                    return (
-                        <BgImage key={r.id} style={{ backgroundImage: `url(${r.imagem})` }}>
-                            <BgHover>
-                                <Title>{r.nome}</Title>
-                            </BgHover>
-                        </BgImage>
-                    );
-                })}
-            </Carousel>
+                <Carousel
+                    ssr
+                    partialVisibile
+                    deviceType={"desktop"}
+                    itemClass="image-item"
+                    responsive={responsive}
+                >
+                    {romance.map(r => {
+                        return (
+                            <BgImage key={r.id} style={{ backgroundImage: `url(${r.imagem})` }}>
+                                <BgHover>
+                                    <Title>{r.nome}</Title>
+                                </BgHover>
+                            </BgImage>
+                        );
+                    })}
+                </Carousel>
             </CategorySection>
             <CategorySection>
                 <Title>Clássico</Title>
-            <Carousel
-                ssr
-                partialVisibile
-                deviceType={"desktop"}
-                itemClass="image-item"
-                responsive={responsive}
-            >
-                {classic.map(cl => {
-                    return (
-                        <BgImage key={cl.id} style={{ backgroundImage: `url(${cl.imagem})` }}>
-                            <BgHover>
-                                <Title>{cl.nome}</Title>
-                            </BgHover>
-                        </BgImage>
-                    );
-                })}
-            </Carousel>
+                <Carousel
+                    ssr
+                    partialVisibile
+                    deviceType={"desktop"}
+                    itemClass="image-item"
+                    responsive={responsive}
+                >
+                    {classic.map(cl => {
+                        return (
+                            <BgImage key={cl.id} style={{ backgroundImage: `url(${cl.imagem})` }}>
+                                <BgHover>
+                                    <Title>{cl.nome}</Title>
+                                </BgHover>
+                            </BgImage>
+                        );
+                    })}
+                </Carousel>
             </CategorySection>
             <CategorySection>
                 <Title>Infantil</Title>
-            <Carousel
-                ssr
-                partialVisibile
-                deviceType={"desktop"}
-                itemClass="image-item"
-                responsive={responsive}
-            >
-                {childish.map(ch => {
-                    return (
-                        <BgImage key={ch.id} style={{ backgroundImage: `url(${ch.imagem})` }}>
-                            <BgHover>
-                                <Title>{ch.nome}</Title>
-                            </BgHover>
-                        </BgImage>
-                    );
-                })}
-            </Carousel>
+                <Carousel
+                    ssr
+                    partialVisibile
+                    deviceType={"desktop"}
+                    itemClass="image-item"
+                    responsive={responsive}
+                >
+                    {childish.map(ch => {
+                        return (
+                            <BgImage key={ch.id} style={{ backgroundImage: `url(${ch.imagem})` }}>
+                                <BgHover>
+                                    <Title>{ch.nome}</Title>
+                                </BgHover>
+                            </BgImage>
+                        );
+                    })}
+                </Carousel>
             </CategorySection>
             <CategorySection>
                 <Title>Tragédia</Title>
-            <Carousel
-                ssr
-                partialVisibile
-                deviceType={"desktop"}
-                itemClass="image-item"
-                responsive={responsive}
-            >
-                {tragedy.map(tr => {
-                    return (
-                        <BgImage key={tr.id} style={{ backgroundImage: `url(${tr.imagem})` }}>
-                            <BgHover>
-                                <Title>{tr.nome}</Title>
-                            </BgHover>
-                        </BgImage>
-                    );
-                })}
-            </Carousel>
+                <Carousel
+                    ssr
+                    partialVisibile
+                    deviceType={"desktop"}
+                    itemClass="image-item"
+                    responsive={responsive}
+                >
+                    {tragedy.map(tr => {
+                        return (
+                            <BgImage key={tr.id} style={{ backgroundImage: `url(${tr.imagem})` }}>
+                                <BgHover>
+                                    <Title>{tr.nome}</Title>
+                                </BgHover>
+                            </BgImage>
+                        );
+                    })}
+                </Carousel>
             </CategorySection>
             <CategorySection>
                 <Title>Curta-Metragem</Title>
-            <Carousel
-                ssr
-                partialVisibile
-                deviceType={"desktop"}
-                itemClass="image-item"
-                responsive={responsive}
-            >
-                {shortFilm.map(sf => {
-                    return (
-                        <BgImage key={sf.id} style={{ backgroundImage: `url(${sf.imagem})` }}>
-                            <BgHover>
-                                <Title>{sf.nome}</Title>
-                            </BgHover>
-                        </BgImage>
-                    );
-                })}
-            </Carousel>
+                <Carousel
+                    ssr
+                    partialVisibile
+                    deviceType={"desktop"}
+                    itemClass="image-item"
+                    responsive={responsive}
+                >
+                    {shortFilm.map(sf => {
+                        return (
+                            <BgImage key={sf.id} style={{ backgroundImage: `url(${sf.imagem})` }}>
+                                <BgHover>
+                                    <Title>{sf.nome}</Title>
+                                </BgHover>
+                            </BgImage>
+                        );
+                    })}
+                </Carousel>
             </CategorySection>
         </>
     );
