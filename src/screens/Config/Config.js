@@ -57,10 +57,10 @@ const Config = () => {
     return (
         <>
 
-            <ImgProfile src={imgStorage} />
-            <h3>Nome: {storage.nomeCompleto}</h3>
-            <h3>Email: {storage.email}</h3>
-            <h3>Nome de usuário: {storage.usuario}</h3>
+            <ImgProfile src={imgStorage || ''} />
+            <h3>Nome: {storage.nomeCompleto || ''}</h3>
+            <h3>Email: {storage.email || ''}</h3>
+            <h3>Nome de usuário: {storage.usuario || ''}</h3>
             <Link to="/home">Voltar a home</Link>
 
             <Formik
