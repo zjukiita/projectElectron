@@ -13,14 +13,16 @@ const Config = () => {
     const [imgStorage, setImgStorage] = useState();
 
     const handleUpdate = useCallback(async (data) => {
+        console.log('Chegou até aqui!')
         try {
             const schema = Yup.object().shape({
                 email: Yup.string().email('Email não encontrado!').required('Campo "email" obrigatório'),
                 senha: Yup.string().min(6, 'A senha deve conter no mínimo 6 caracteres').required('Campo "senha"obrigatório'),
             });
             await schema.validate(data);
-            const response = api.put(`/users/${storage.id}`, data);
-            console.log(response)
+            const response = await api.put(`/users/${storage.id}`, data);
+            const jsonData = JSON.stringify(response.data);
+            localStorage.setItem('login', jsonData);
         } catch (error) {
             console.log(`Não foi possivel atualizar os dados do usuario! ${error}`)
         }
