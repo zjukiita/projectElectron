@@ -8,7 +8,7 @@ import MainCarousel from '../../components/HomeComponents/MainCarousel';
 import Carousel from 'react-multi-carousel';
 
 // Importações de estilos da Navbar
-import { Dropdown, UserImg, Logo, BgImage, Title, BgHover, CategorySection } from './styles';
+import { Dropdown, UserImg, Logo, BgImage, Title, BgHover, CategorySection, Star } from './styles';
 import { Navbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap';
 
 const Home = () => {
@@ -42,7 +42,6 @@ const Home = () => {
             console.log(error)
         }
     }, []);
-
 
     // Array de teste
     const Categorias = [
@@ -168,9 +167,9 @@ const Home = () => {
                     <NavDropdown title="Categorias" id="basic-nav-dropdown">
                         {Categorias.map(c => {
                             return (
-                                <Dropdown onClick={ () => { 
+                                <Dropdown onClick={() => {
                                     localStorage.setItem('category', JSON.stringify(c.categoria));
-                                    history.push('/categoria')
+                                    history.push('/categoria');
                                 }}>
                                     {c.categoria}
                                 </Dropdown>
@@ -213,6 +212,7 @@ const Home = () => {
                             <BgImage key={a.id} style={{ backgroundImage: `url(${a.imagem})` }}>
                                 <BgHover>
                                     <Title>{a.nome}</Title>
+                                    <button><i className={'fas fa-star'}></i></button>
                                 </BgHover>
                             </BgImage>
                         );

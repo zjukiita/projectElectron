@@ -46,6 +46,15 @@ export const CategorySection = styled.div`
    margin-left: 6px;
    margin-top: 20px;
 `
+export const Star = styled.button`
+    color: #ccc;
+    border: none;
+    background-color: transparent;
+
+    &:hover {
+        color: yellow; 
+    }
+`
 
 
 

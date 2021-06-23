@@ -19,7 +19,7 @@ const Category = () => {
 
     const loadingMovies = useCallback(async () => {
         try {
-            const response = await api.get(`/filmes/categoria/${storage.categoria}`)
+            const response = await api.get(`/filmes/categoria/${storage}`)
             console.log(response)
             if (response.data) setMovie(response.data);
         } catch (error) {
