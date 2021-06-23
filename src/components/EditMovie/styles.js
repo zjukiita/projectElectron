@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const Modaal = styled.div`
+export const Div = styled.div`
     width: 100%;
     height: 100%;
     position: fixed;
@@ -17,23 +17,9 @@ export const Modaal = styled.div`
 
 export const Container = styled.div`
     background-color: #424242;
-    border-radius: 10px;
-    color: #000;
     width: 90%;
     height: 90%;
     overflow: auto;
-`;
-
-export const Button = styled.button`
-    display: flex;
-    background-color: transparent;
-    color: #fff;
-    cursor: pointer;
-    border: 10px;
-    border-color: #fff;
-    font-size: 2vw;
-    margin-left: 25px;
-    margin-bottom: 20px;
 `;
 
 export const Close = styled.button`
