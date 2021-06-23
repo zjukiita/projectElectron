@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import api from '../../services/api'
 import { Link } from 'react-router-dom';
-import { Formik } from 'formik'
-import * as Yup from 'yup'
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 // Estilos
 import { ImgProfile } from './styles'
+
 
 const Config = () => {
 
@@ -13,16 +14,23 @@ const Config = () => {
     const [imgStorage, setImgStorage] = useState();
 
     const handleUpdate = useCallback(async (data) => {
-        console.log('Chegou até aqui!')
         try {
             const schema = Yup.object().shape({
-                email: Yup.string().email('Email não encontrado!').required('Campo "email" obrigatório'),
-                senha: Yup.string().min(6, 'A senha deve conter no mínimo 6 caracteres').required('Campo "senha"obrigatório'),
+                email: Yup.string().email('Email inválido!'),
+                usuario: Yup.string(),
             });
+
             await schema.validate(data);
             const response = await api.put(`/users/${storage.id}`, data);
-            const jsonData = JSON.stringify(response.data);
-            localStorage.setItem('login', jsonData);
+
+            if (response.data) {
+                const jsonData = JSON.stringify(response.data);
+                localStorage.setItem('login', jsonData);
+                alert('Dados atualizados com sucesso!')
+            } else {
+                alert('Algo deu errado!')
+            }
+
         } catch (error) {
             console.log(`Não foi possivel atualizar os dados do usuario! ${error}`)
         }
@@ -58,12 +66,13 @@ const Config = () => {
                 initialValues={{
                     senha: '',
                     email: storage.email,
+                    nomeCompleto: storage.nomeCompleto,
+                    usuario: storage.usuario
                 }}
             >
                 {({ handleSubmit, values, setFieldValue, handleChange, handleBlur }) => (
                     <>
                         <h2>Atualização de informações</h2>
-
                         <div>
                             <input
                                 type="text"
@@ -76,11 +85,11 @@ const Config = () => {
 
                         <div>
                             <input
-                                type="password"
-                                placeholder="Insira sua senha"
-                                onChange={handleChange('senha')}
-                                onBlur={handleBlur('senha')}
-                                value={values.senha}
+                                type="text"
+                                placeholder="Insira seu usuário"
+                                onChange={handleChange('usuario')}
+                                onBlur={handleBlur('usuario')}
+                                value={values.usuario}
                             />
                         </div>
                         <button type="button" onClick={() => handleSubmit()}>Enviar</button>
