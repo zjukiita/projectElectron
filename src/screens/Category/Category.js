@@ -41,7 +41,7 @@ const Category = () => {
                 return (
                     <>
                     <Link to="/home">Voltar para home</Link>
-                        <div>
+                        <div key={m.id}>
                             <img src={m.imagem} />
                             <div>
                                 <h1>{m.nome}</h1>

@@ -167,7 +167,7 @@ const Home = () => {
                     <NavDropdown title="Categorias" id="basic-nav-dropdown">
                         {Categorias.map(c => {
                             return (
-                                <Dropdown onClick={() => {
+                                <Dropdown key={c.categoria} onClick={() => {
                                     localStorage.setItem('category', JSON.stringify(c.categoria));
                                     history.push('/categoria');
                                 }}>
