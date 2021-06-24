@@ -1,17 +1,18 @@
 import React, { useCallback, useState } from 'react';
-import * as Yup from 'yup'
-import api from '../../services/api'
+import * as Yup from 'yup';
+import api from '../../services/api';
 import { useFormik, Formik } from 'formik';
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom';
 
 // Styled Components \\
-import * as s from './styles'
+import * as s from './styles';
 
 // Bootstrap 
-import Modal from 'react-bootstrap/Modal'
+import Modal from 'react-bootstrap/Modal';
 
 const Login = () => {
     const history = useHistory();
+
     const [modalShow, setModalShow] = useState(false);
 
     const handleLogin = useCallback(async (data) => {
@@ -22,9 +23,14 @@ const Login = () => {
             });
             await schema.validate(data);
             const response = await api.post('/login', data);
-            const jsonData = JSON.stringify(response.data);
-            await localStorage.setItem('login', jsonData );
-            history.push('/perfil');
+            if (response.data) {
+                const jsonData = JSON.stringify(response.data);
+                localStorage.setItem('login', jsonData);
+                history.push('/perfil');
+            }
+            else {
+                alert('Algo de errado aconteceu!')
+            }
         }
         catch (error) {
             if (error instanceof Yup.ValidationError) {
@@ -45,7 +51,6 @@ const Login = () => {
             });
             await schema.validate(data);
             const response = api.post('/users', data);
-                alert('Registro realizado com sucesso!');
             setModalShow(false);
         }
         catch (error) {
@@ -70,7 +75,6 @@ const Login = () => {
                         {({ handleSubmit, values, setFieldValue, handleChange, handleBlur }) => (
                             <>
                                 <s.Title>Login</s.Title>
-
                                 <div>
                                     <s.fieldInput
                                         type="text"
@@ -95,9 +99,9 @@ const Login = () => {
                             </>
                         )}
                     </Formik>
-
                     <Modal
                         show={modalShow}
+                        className="RegisterModal"
                         onHide={() => setModalShow(false)}
                         size="lg"
                         aria-labelledby="contained-modal-title-vcenter"

@@ -1,11 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Carousel from 'react-multi-carousel';
 import api from '../../services/api';
 import path from 'path';
 
 // Importação dos componentes
 import MainCarousel from '../../components/HomeComponents/MainCarousel';
-import Carousel from 'react-multi-carousel';
+
+//Importação da Array de categorias
+import Categorias from '../../components/Array'
 
 // Importações de estilos da Navbar
 import { Dropdown, UserImg, Logo, BgImage, Title, BgHover, CategorySection, Star } from './styles';
@@ -43,26 +46,10 @@ const Home = () => {
         }
     }, []);
 
-    // Array de teste
-    const Categorias = [
-        {
-            categoria: 'Ação'
-        },
-        {
-            categoria: 'Aventura'
-        },
-        {
-            categoria: 'Comédia'
-        },
-        {
-            categoria: 'Romance'
-        }
-    ];
-
     const loadingSearch = useCallback(async () => {
         setComedy(comedy.filter(c => c.nome == search));
-    }, [search])
-
+    }, [search]);   
+    
     const loadingAction = useCallback(async () => {
         try {
             const response = await api.get('/filmes/categoria/Ação');
@@ -70,18 +57,56 @@ const Home = () => {
         } catch (error) {
             console.log('Falha no carregamento dos filmes de ação!');
         }
-    }, []);
-
-    const loadingComedy = useCallback(async () => {
+    }, []); const loadingComedy = useCallback(async () => {
         try {
             const response = await api.get('/filmes/categoria/Comédia');
             if (response.data) setComedy(response.data);
         } catch (error) {
             console.log('Falha no carregamento dos filmes de comédia!');
         }
-    }, []);
-
-    const loadingAdventure = useCallback(async () => {
+    }, []); const loadingTerror = useCallback(async () => {
+        try {
+            const response = await api.get('/filmes/categoria/Terror');
+            if (response.data) setTerror(response.data);
+        } catch (error) {
+            console.log('Falha no carregamento dos filmes de terror!');
+        }
+    }, []); const loadingTragedy = useCallback(async () => {
+        try {
+            const response = await api.get('/filmes/categoria/Drama');
+            if (response.data) setTragedy(response.data)
+        } catch (error) {
+            console.log('Falha no carregamento dos filmes de drama!');
+        }
+    }, []); const loadingClassic = useCallback(async () => {
+        try {
+            const response = await api.get('/filmes/categoria/Clássico');
+            if (response.data) setClassic(response.data)
+        } catch (error) {
+            console.log('Falha no carregamento dos filmes clássicos!');
+        }
+    }, []); const loadingRomance = useCallback(async () => {
+        try {
+            const response = await api.get('/filmes/categoria/Romance');
+            if (response.data) setRomance(response.data)
+        } catch (error) {
+            console.log('Falha no carregamento dos filmes de romance!');
+        }
+    }, []); const loadingChildish = useCallback(async () => {
+        try {
+            const response = await api.get('/filmes/categoria/Infantil');
+            if (response.data) setChildish(response.data);
+        } catch (error) {
+            console.log('Falha no carregamento dos filmes infantis!');
+        }
+    }, []); const loadingShortFilm = useCallback(async () => {
+        try {
+            const response = await api.get('/filmes/categoria/Curta-Metragem');
+            if (response.data) setShortFilm(response.data)
+        } catch (error) {
+            console.log('Falha no carregamento dos filmes de curta-metragem!');
+        }
+    }, []); const loadingAdventure = useCallback(async () => {
         try {
             const response = await api.get('/filmes/categoria/Aventura');
             if (response.data) setAdventure(response.data);
@@ -90,63 +115,9 @@ const Home = () => {
         }
     }, []);
 
-    const loadingTerror = useCallback(async () => {
-        try {
-            const response = await api.get('/filmes/categoria/Terror');
-            if (response.data) setTerror(response.data);
-        } catch (error) {
-            console.log('Falha no carregamento dos filmes de terror!');
-        }
-    }, []);
-
-    const loadingChildish = useCallback(async () => {
-        try {
-            const response = await api.get('/filmes/categoria/Infantil');
-            if (response.data) setChildish(response.data);
-        } catch (error) {
-            console.log('Falha no carregamento dos filmes infantis!');
-        }
-    }, []);
-
-    const loadingShortFilm = useCallback(async () => {
-        try {
-            const response = await api.get('/filmes/categoria/Curta-Metragem');
-            if (response.data) setShortFilm(response.data)
-        } catch (error) {
-            console.log('Falha no carregamento dos filmes de curta-metragem!');
-        }
-    }, []);
-
-    const loadingTragedy = useCallback(async () => {
-        try {
-            const response = await api.get('/filmes/categoria/Drama');
-            if (response.data) setTragedy(response.data)
-        } catch (error) {
-            console.log('Falha no carregamento dos filmes de drama!');
-        }
-    }, []);
-
-    const loadingClassic = useCallback(async () => {
-        try {
-            const response = await api.get('/filmes/categoria/Clássico');
-            if (response.data) setClassic(response.data)
-        } catch (error) {
-            console.log('Falha no carregamento dos filmes clássicos!');
-        }
-    }, []);
-
-    const loadingRomance = useCallback(async () => {
-        try {
-            const response = await api.get('/filmes/categoria/Romance');
-            if (response.data) setRomance(response.data)
-        } catch (error) {
-            console.log('Falha no carregamento dos filmes de romance!');
-        }
-    }, []);
-
     useEffect(() => {
         getStorage();
-    }, [getStorage])
+    }, [getStorage]);
 
     useEffect(() => {
         loadingSearch();
@@ -168,7 +139,7 @@ const Home = () => {
                         {Categorias.map(c => {
                             return (
                                 <Dropdown key={c.categoria} onClick={() => {
-                                    localStorage.setItem('category', JSON.stringify(c.categoria));
+                                    localStorage.setItem('category', c.categoria);
                                     history.push('/categoria');
                                 }}>
                                     {c.categoria}
@@ -212,7 +183,6 @@ const Home = () => {
                             <BgImage key={a.id} style={{ backgroundImage: `url(${a.imagem})` }}>
                                 <BgHover>
                                     <Title>{a.nome}</Title>
-                                    <button><i className={'fas fa-star'}></i></button>
                                 </BgHover>
                             </BgImage>
                         );
