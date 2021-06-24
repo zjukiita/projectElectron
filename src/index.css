@@ -13,20 +13,31 @@ body {
 
 /* Modal Styles */
 
-.modal-content {
+.error .modal-content {
+    background-color: transparent;
+}
+
+.error .bg-warning {
+    color: rgb(92, 67, 13);
+    border-radius: 12px;
+    background-color: #ffc107cd !important;
+}
+
+.RegisterModal .modal-content {
     background-color: #00000000 !important;
 }
 
-.modal-body {
+.RegisterModal .modal-body {
     border-radius: 8px;
     background-color: #363636;
     box-shadow: 10px 5px 5px #00000097;
 }
 
-.modal-body h2 {
+.RegisterModal .modal-body h2 {
     margin-top: 5px;
     margin-bottom: 35px;
 }
+
 
 
 

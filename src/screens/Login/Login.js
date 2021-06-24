@@ -1,17 +1,18 @@
 import React, { useCallback, useState } from 'react';
-import * as Yup from 'yup'
-import api from '../../services/api'
+import * as Yup from 'yup';
+import api from '../../services/api';
 import { useFormik, Formik } from 'formik';
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom';
 
 // Styled Components \\
-import * as s from './styles'
+import * as s from './styles';
 
 // Bootstrap 
-import Modal from 'react-bootstrap/Modal'
+import Modal from 'react-bootstrap/Modal';
 
 const Login = () => {
     const history = useHistory();
+
     const [modalShow, setModalShow] = useState(false);
 
     const handleLogin = useCallback(async (data) => {
@@ -50,7 +51,6 @@ const Login = () => {
             });
             await schema.validate(data);
             const response = api.post('/users', data);
-            alert('Registro realizado com sucesso!');
             setModalShow(false);
         }
         catch (error) {
@@ -99,9 +99,9 @@ const Login = () => {
                             </>
                         )}
                     </Formik>
-
                     <Modal
                         show={modalShow}
+                        className="RegisterModal"
                         onHide={() => setModalShow(false)}
                         size="lg"
                         aria-labelledby="contained-modal-title-vcenter"
