@@ -16,13 +16,19 @@ const Config = () => {
         console.log('Chegou até aqui!')
         try {
             const schema = Yup.object().shape({
-                email: Yup.string().email('Email não encontrado!').required('Campo "email" obrigatório'),
-                senha: Yup.string().min(6, 'A senha deve conter no mínimo 6 caracteres').required('Campo "senha"obrigatório'),
+                email: Yup.string().email('Email não validado!'),
+                usuario: Yup.string()
             });
             await schema.validate(data);
             const response = await api.put(`/users/${storage.id}`, data);
-            const jsonData = JSON.stringify(response.data);
-            localStorage.setItem('login', jsonData);
+            if (response.data) {
+                const jsonData = JSON.stringify(response.data);
+                localStorage.setItem('login', jsonData);
+                alert('Dados atualizados com sucesso!')
+            }
+            else {
+                alert('Algo inesperado aconteceu!')
+            }
         } catch (error) {
             console.log(`Não foi possivel atualizar os dados do usuario! ${error}`)
         }
@@ -30,9 +36,10 @@ const Config = () => {
 
     const getStorage = useCallback(async () => {
         try {
-            const storage = await localStorage.getItem('login');
+            const storage = localStorage.getItem('login');
             setStorage(JSON.parse(storage));
-            const imgStorage = await localStorage.getItem('img');
+            console.log(storage)
+            const imgStorage = localStorage.getItem('img');
             setImgStorage(JSON.parse(imgStorage));
         } catch (error) {
             console.log(error)
@@ -56,8 +63,10 @@ const Config = () => {
                 enableReinitialize
                 onSubmit={handleUpdate}
                 initialValues={{
-                    senha: '',
+                    senha: storage.senha,
                     email: storage.email,
+                    nomeCompleto: storage.nomeCompleto,
+                    usuario: storage.usuario,
                 }}
             >
                 {({ handleSubmit, values, setFieldValue, handleChange, handleBlur }) => (
@@ -76,11 +85,11 @@ const Config = () => {
 
                         <div>
                             <input
-                                type="password"
+                                type="text"
                                 placeholder="Insira sua senha"
-                                onChange={handleChange('senha')}
-                                onBlur={handleBlur('senha')}
-                                value={values.senha}
+                                onChange={handleChange('usuario')}
+                                onBlur={handleBlur('usuario')}
+                                value={values.usuario}
                             />
                         </div>
                         <button type="button" onClick={() => handleSubmit()}>Enviar</button>

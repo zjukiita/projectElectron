@@ -44,26 +44,13 @@ const Home = () => {
     }, []);
 
     // Array de teste
-    const Categorias = [
-        {
-            categoria: 'Ação'
-        },
-        {
-            categoria: 'Aventura'
-        },
-        {
-            categoria: 'Comédia'
-        },
-        {
-            categoria: 'Romance'
-        }
-    ];
+    const Categorias = [{categoria: 'Ação'},{categoria: 'Aventura'},{categoria: 'Comédia'},{categoria: 'Infantil'},{categoria: 'Terror'},{categoria: 'Curta-Metragem'},{categoria: 'Drama'},{categoria: 'Clássico'}];
 
     const loadingSearch = useCallback(async () => {
         setComedy(comedy.filter(c => c.nome == search));
-    }, [search])
+    }, [search]);
 
-    const loadingAction = useCallback(async () => {
+const loadingAction = useCallback(async () => {
         try {
             const response = await api.get('/filmes/categoria/Ação');
             if (response.data) setAction(response.data);
@@ -168,7 +155,7 @@ const Home = () => {
                         {Categorias.map(c => {
                             return (
                                 <Dropdown key={c.categoria} onClick={() => {
-                                    localStorage.setItem('category', JSON.stringify(c.categoria));
+                                    localStorage.setItem('category', c.categoria);
                                     history.push('/categoria');
                                 }}>
                                     {c.categoria}
@@ -212,7 +199,6 @@ const Home = () => {
                             <BgImage key={a.id} style={{ backgroundImage: `url(${a.imagem})` }}>
                                 <BgHover>
                                     <Title>{a.nome}</Title>
-                                    <button><i className={'fas fa-star'}></i></button>
                                 </BgHover>
                             </BgImage>
                         );

@@ -5,11 +5,11 @@ import api from '../../services/api';
 const Category = () => {
 
     const [movie, setMovie] = useState([]);
-    const [storage, setStorage] = useState({});
 
     const loadingMovies = useCallback(async () => {
         try {
-            const response = await api.get(`/filmes/categoria/Ação`)
+            const storage = localStorage.getItem('category');
+            const response = await api.get(`/filmes/categoria/${storage}`)
             console.log(response)
             if (response.data) setMovie(response.data);
         } catch (error) {

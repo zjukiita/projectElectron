@@ -22,9 +22,14 @@ const Login = () => {
             });
             await schema.validate(data);
             const response = await api.post('/login', data);
-            const jsonData = JSON.stringify(response.data);
-            await localStorage.setItem('login', jsonData );
-            history.push('/perfil');
+            if (response.data) {
+                const jsonData = JSON.stringify(response.data);
+                localStorage.setItem('login', jsonData);
+                history.push('/perfil');
+            }
+            else {
+                alert('Algo de errado aconteceu!')
+            }
         }
         catch (error) {
             if (error instanceof Yup.ValidationError) {
@@ -45,7 +50,7 @@ const Login = () => {
             });
             await schema.validate(data);
             const response = api.post('/users', data);
-                alert('Registro realizado com sucesso!');
+            alert('Registro realizado com sucesso!');
             setModalShow(false);
         }
         catch (error) {
@@ -70,7 +75,6 @@ const Login = () => {
                         {({ handleSubmit, values, setFieldValue, handleChange, handleBlur }) => (
                             <>
                                 <s.Title>Login</s.Title>
-
                                 <div>
                                     <s.fieldInput
                                         type="text"
