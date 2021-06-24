@@ -43,7 +43,10 @@ const Modal = ({ id = 'mod', onClose = () => { }, selectedMovie }) => {
             anoDeLancamento: Yup.string().required('Obrigatório'),
             categoria: Yup.string().required('Obrigatório'),
             classificacao: Yup.string().required('Obrigatório'),
-        })
+        }),
+        onSubmit: values => {
+            alert(JSON.stringify(values, null, 2));
+        }
     })
 
     return (
@@ -141,7 +144,7 @@ const Modal = ({ id = 'mod', onClose = () => { }, selectedMovie }) => {
                                     {...formik.getFieldProps('classificacao')}
                                 />
                             </div>
-                            <button type="submit" >Salvar</button>
+                            <button type="button" onClick={() => handleSubmit()} >Salvar</button>
                         </form>
                     )}
                 </Container>
