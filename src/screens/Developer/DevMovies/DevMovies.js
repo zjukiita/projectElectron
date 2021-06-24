@@ -14,6 +14,14 @@ const DevMovies = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState();
 
+    const updateMovie = useCallback(async () => {
+        loadingMovies();
+        if (selectedMovie) {
+            const index = movie.findIndex(m => m.id === selectedMovie.id);
+            setSelectedMovie(movie[index]);
+        }
+    }, [loadingMovies, movie, selectedMovie]);
+
     const loadingMovies = useCallback(async () => {
         try {
             const response = await api.get('/filmes');
@@ -97,7 +105,12 @@ const DevMovies = () => {
                     );
                 })}
             </div>
-            {modalVisible ? <Modal onClose={() => setModalVisible(false)} selectedMovie={selectedMovie} /> : null}
+            {modalVisible ?
+                <Modal
+                    onUpdate={() => updateMovie()}
+                    onClose={() => setModalVisible(false)}
+                    selectedMovie={selectedMovie}
+                /> : null}
         </>
     );
 }

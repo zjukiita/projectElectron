@@ -1,35 +1,36 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MoviesInfo from '../MoviesInfo';
 import api from '../../services/api';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Modaal, Container, Close, Button } from './styles';
 
-const Modal = ({ id = 'mod', onClose = () => { }, selectedMovie }) => {
+const Modal = ({ id = 'mod', onClose = () => { }, selectedMovie, onUpdate = () => { } }) => {
 
     const [edit, setEdit] = useState(false);
+    const [movie, setMovie] = useState(selectedMovie);
+
+    useEffect(() => {
+        setMovie(selectedMovie);
+    }, [selectedMovie]);
 
     const handleOutsideClick = (e) => {
-        if (e.target.id === id) onClose();
-    }
-
-    const updateMovie = async (id) => {
-        await api.put(`/filmes/${id}`);
-        setEdit(false);
+        if (e.target.id === id) 
+        onClose();
     };
 
     const formik = useFormik({
         initialValues: {
-            nome: selectedMovie.nome,
-            imagem: selectedMovie.imagem,
-            sinopse: selectedMovie.sinopse,
-            duracao: selectedMovie.duracao,
-            link: selectedMovie.link,
-            trailer: selectedMovie.trailer,
-            avaliacao: selectedMovie.avaliacao,
-            anoDeLancamento: selectedMovie.anoDeLancamento,
-            categoria: selectedMovie.categoria,
-            classificacao: selectedMovie.classificacao
+            nome: movie.nome || '',
+            imagem: movie.imagem || '',
+            sinopse: movie.sinopse || '',
+            duracao: movie.duracao || '',
+            link: movie.link || '',
+            trailer: movie.trailer || '',
+            avaliacao: movie.avaliacao || '',
+            anoDeLancamento: movie.anoDeLancamento || '',
+            categoria: movie.categoria || '',
+            classificacao: movie.classificacao || '',
         },
         enableReinitialize: true,
         validationSchema: Yup.object({
@@ -44,8 +45,20 @@ const Modal = ({ id = 'mod', onClose = () => { }, selectedMovie }) => {
             categoria: Yup.string().required('Obrigatório'),
             classificacao: Yup.string().required('Obrigatório'),
         }),
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+        onSubmit: async (values) => {
+            try {
+                await api.put(`/filmes/${selectedMovie.id}`, values);
+                setMovie({
+                    id: selectedMovie.id,
+                    ...values
+                });
+                onUpdate();
+                onClose();
+                alert(JSON.stringify(values, null, 2));
+            } catch (error) {
+                console.log('erro')
+            }
+            setEdit(false);
         }
     })
 
@@ -54,14 +67,14 @@ const Modal = ({ id = 'mod', onClose = () => { }, selectedMovie }) => {
             <Modaal id={id} className="mod" onClick={handleOutsideClick} >
                 <Container>
                     <Close onClick={onClose} />
-                    {!edit ? (
-                        <div>
-                            <MoviesInfo movie={selectedMovie} />
 
-                            <Button onClick={() => {
-                                setEdit(true)
-                            }} >Editar</Button>
+                    {!edit ? (
+
+                        <div>
+                            <MoviesInfo movie={movie} />
+                            <Button onClick={() => { setEdit(true) }} >Editar</Button>
                         </div>
+
                     ) : (
                         <form onSubmit={formik.handleSubmit}>
                             <div>
@@ -73,7 +86,7 @@ const Modal = ({ id = 'mod', onClose = () => { }, selectedMovie }) => {
                                 />
                             </div>
                             <div>
-                                <label htmlfor="imagem">Imagem</label>
+                                <label htmlFor="imagem">Imagem</label>
                                 <input
                                     id="imagem"
                                     type="text"
@@ -144,7 +157,7 @@ const Modal = ({ id = 'mod', onClose = () => { }, selectedMovie }) => {
                                     {...formik.getFieldProps('classificacao')}
                                 />
                             </div>
-                            <button type="button" onClick={() => handleSubmit()} >Salvar</button>
+                            <button type="submit" >Enviar</button>
                         </form>
                     )}
                 </Container>
