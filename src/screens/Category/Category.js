@@ -1,6 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
+import path from 'path';
+
+// Styled Components
+import { Dropdown, UserImg, Logo} from './styles';
+import { Navbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap';
 
 const Category = () => {
 
