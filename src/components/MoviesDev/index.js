@@ -3,7 +3,21 @@ import { P } from './styles';
 
 const MoviesDev = ({ movie }) => {
     return (
-        <P>{movie.nome}</P>
+        <div style={{
+            display: "flex",
+            alignItems: "center"
+        }}>
+            <img
+                style={{
+                    width: "12vw",
+                    height: "12vw",
+                    borderRadius: "50%"
+                }}
+                src={movie.imagem}
+                alt={movie.nome}
+            />
+            <P>{movie.nome}</P>
+        </div>
     );
 };
 

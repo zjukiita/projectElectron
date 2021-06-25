@@ -15,7 +15,7 @@ const GlobalMenuDev = () => {
                         padding: "0",
                         paddingTop: "10px",
                         paddingBottom: "10px",
-                    }} to="/DevMovies"> Filmes </Link>
+                    }} to="/"> Filmes </Link>
                 </Color>
                 <Color>
                     <Link style={{
