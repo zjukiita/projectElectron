@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import Modal from 'react-bootstrap/Modal';
 
 // Estilos
-import { ImgProfile, TitleError } from './styles'
+import { ImgProfile, TitleError, FontTag, FontUser, Box } from './styles'
 
 const Config = () => {
 
@@ -60,10 +60,10 @@ const Config = () => {
     return (
         <>
             <ImgProfile src={imgStorage || ''} />
-            <h3>Nome: {storage.nomeCompleto || ''}</h3>
-            <h3>Email: {storage.email || ''}</h3>
-            <h3>Nome de usuário: {storage.usuario || ''}</h3>
-            <Link to="/home">Voltar a home</Link>
+            <h3><FontTag>Nome:</FontTag> <FontUser>{storage.nomeCompleto || ''}</FontUser></h3>
+            <h3><FontTag>Email:</FontTag> <FontUser>{storage.email || ''}</FontUser></h3>
+            <h3><FontTag>Nome de usuário:</FontTag> <FontUser>{storage.usuario || ''}</FontUser></h3>
+            <h5><FontTag><Link to="/home">Voltar a home</Link></FontTag></h5>
 
             <Modal show={show} className="error" onHide={handleClose}>
                 <Modal.Body className="bg-warning">
@@ -83,38 +83,40 @@ const Config = () => {
             >
                 {({ handleSubmit, values, setFieldValue, handleChange, handleBlur }) => (
                     <>
-                        <h2>Atualização de informações</h2>
+                        <FontTag><h2>Atualização de informações</h2></FontTag>
+                        <Box>
+                            <div>
+                                <input
+                                    type="text"
+                                    placeholder="Insira seu email"
+                                    onChange={handleChange('email')}
+                                    onBlur={handleBlur('email')}
+                                    value={values.email}
+                                />
+                            </div>
 
-                        <div>
-                            <input
-                                type="text"
-                                placeholder="Insira seu email"
-                                onChange={handleChange('email')}
-                                onBlur={handleBlur('email')}
-                                value={values.email}
-                            />
-                        </div>
+                            <div>
+                                <input
+                                    type="text"
+                                    placeholder="Insira seu usuário"
+                                    onChange={handleChange('usuario')}
+                                    onBlur={handleBlur('usuario')}
+                                    value={values.usuario}
+                                />
+                            </div>
 
-                        <div>
-                            <input
-                                type="text"
-                                placeholder="Insira seu usuário"
-                                onChange={handleChange('usuario')}
-                                onBlur={handleBlur('usuario')}
-                                value={values.usuario}
-                            />
-                        </div>
+                            <div>
+                                <input
+                                    type="password"
+                                    placeholder="Insira sua senha"
+                                    onChange={handleChange('senha')}
+                                    onBlur={handleBlur('senha')}
+                                    value={values.senha}
+                                />
+                            </div>
 
-                        <div>
-                            <input
-                                type="password"
-                                placeholder="Insira sua senha"
-                                onChange={handleChange('senha')}
-                                onBlur={handleBlur('senha')}
-                                value={values.senha}
-                            />
-                        </div>
-                        <button type="button" onClick={() => handleSubmit()}>Enviar</button>
+                            <button type="button" onClick={() => handleSubmit()}>Enviar</button>
+                        </Box>
                     </>
                 )}
             </Formik>
