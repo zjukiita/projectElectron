@@ -1,5 +1,10 @@
 import styled, { css } from 'styled-components';
 
+export const Logo = styled.img`
+    width: 150px;
+    padding-top: 30px;
+    padding-left: 30px;
+`
 export const Main = styled.main`
     width: 40vw;
     padding: 2%;
@@ -51,7 +56,6 @@ export const Button = styled.button`
         background-color: #363636;
     }
 `
-
 export const ButtonRight = styled.button`
     border: 0;
     color: #fff;
@@ -73,7 +77,6 @@ export const ButtonRight = styled.button`
         background-color: #363636;
     }
 `
-
 export const ButtonRegister = styled.button`
     border: 0;
     color: #fff;
@@ -96,7 +99,6 @@ export const ButtonRegister = styled.button`
         background-color: #363636;
     }
 `
-
 export const ButtonRegisterLeft = styled.button`
     border: 0;
     color: #fff;
@@ -119,8 +121,6 @@ export const ButtonRegisterLeft = styled.button`
     background-color: #363636;
     }
 `
-
 export const ModalFooter = styled.div`
     border-top: 1px #666 solid;
-
 `

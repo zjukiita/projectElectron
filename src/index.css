@@ -3,6 +3,10 @@ body {
     background-color: #2c2c2c !important ;
 }
 
+.bgRegister {
+    background-image: url(./assets/bgRegister.jpg);
+}
+
 .nav-item .dropdown-toggle {
     color: #000;
 }

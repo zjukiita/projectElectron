@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import * as Yup from 'yup';
 import api from '../../services/api';
 import { useFormik, Formik } from 'formik';
+import path from 'path'
 import { useHistory, Link } from 'react-router-dom';
 
 // Styled Components \\
@@ -62,120 +63,123 @@ const Login = () => {
 
     return (
         <>
-            <s.Content>
-                <s.Main>
-                    <Formik
-                        enableReinitialize
-                        onSubmit={handleLogin}
-                        initialValues={{
-                            senha: "",
-                            email: "",
-                        }}
-                    >
-                        {({ handleSubmit, values, setFieldValue, handleChange, handleBlur }) => (
-                            <>
-                                <s.Title>Login</s.Title>
-                                <div>
-                                    <s.fieldInput
-                                        type="text"
-                                        placeholder="Insira seu email"
-                                        onChange={handleChange('email')}
-                                        onBlur={handleBlur('email')}
-                                        value={values.email}
-                                    />
-                                </div>
+            <div className="bgRegister">
+                <s.Logo src={path.join(__dirname, '../../assets/logo.png')} />
+                <s.Content className="bg-ticket">
+                    <s.Main>
+                        <Formik
+                            enableReinitialize
+                            onSubmit={handleLogin}
+                            initialValues={{
+                                senha: "",
+                                email: "",
+                            }}
+                        >
+                            {({ handleSubmit, values, setFieldValue, handleChange, handleBlur }) => (
+                                <>
+                                    <s.Title>Login</s.Title>
+                                    <div>
+                                        <s.fieldInput
+                                            type="text"
+                                            placeholder="Insira seu email"
+                                            onChange={handleChange('email')}
+                                            onBlur={handleBlur('email')}
+                                            value={values.email}
+                                        />
+                                    </div>
 
-                                <div>
-                                    <s.fieldInput
-                                        type="password"
-                                        placeholder="Insira sua senha"
-                                        onChange={handleChange('senha')}
-                                        onBlur={handleBlur('senha')}
-                                        value={values.senha}
-                                    />
-                                </div>
-                                <s.Button type="button" onClick={() => handleSubmit()}>Enviar</s.Button>
-                                <s.ButtonRight type="button" onClick={() => setModalShow(true)}>Crie sua conta</s.ButtonRight>
-                            </>
-                        )}
-                    </Formik>
-                    <Modal
-                        show={modalShow}
-                        className="RegisterModal"
-                        onHide={() => setModalShow(false)}
-                        size="lg"
-                        aria-labelledby="contained-modal-title-vcenter"
-                        centered
-                    >
-                        <Modal.Body>
-                            <s.Title>Cadastro</s.Title>
-                            <Formik
-                                enableReinitialize
-                                onSubmit={handleRegister}
-                                initialValues={{
-                                    senha: "",
-                                    senhaVerify: "",
-                                    nomeCompleto: "",
-                                    usuario: "",
-                                    email: "",
-                                }}
-                            >
-                                {({ handleSubmit, values, setFieldValue, handleChange, handleBlur }) => (
-                                    <>
-                                        <div>
-                                            <s.fieldInput
-                                                type="text"
-                                                placeholder="Insira seu nome"
-                                                onChange={handleChange('nomeCompleto')}
-                                                onBlur={handleBlur('nomeCompleto')}
-                                                value={values.nomeCompleto}
-                                            />
-                                        </div>
-                                        <div>
-                                            <s.fieldInput
-                                                type="text"
-                                                placeholder="Insira seu email"
-                                                onChange={handleChange('email')}
-                                                onBlur={handleBlur('email')}
-                                                value={values.email}
-                                            />
-                                        </div>
-                                        <div>
-                                            <s.fieldInput
-                                                type="text"
-                                                placeholder="Insira seu usuario"
-                                                onChange={handleChange('usuario')}
-                                                onBlur={handleBlur('usuario')}
-                                                value={values.usuario}
-                                            />
-                                        </div>
-                                        <div>
-                                            <s.fieldInput
-                                                type="password"
-                                                placeholder="Insira sua senha"
-                                                onChange={handleChange('senha')}
-                                                onBlur={handleBlur('senha')}
-                                                value={values.senha}
-                                            />
-                                        </div>
-                                        <div>
-                                            <s.fieldInput
-                                                type="password"
-                                                placeholder="Confirme sua senha"
-                                                onChange={handleChange('senhaVerify')}
-                                                onBlur={handleBlur('senhaVerify')}
-                                                value={values.senhaVerify}
-                                            />
-                                        </div>
-                                        <s.ButtonRegister onClick={() => setModalShow(false)}>Fechar</s.ButtonRegister>
-                                        <s.ButtonRegisterLeft type="button" onClick={() => handleSubmit()}>Enviar</s.ButtonRegisterLeft>
-                                    </>
-                                )}
-                            </Formik>
-                        </Modal.Body>
-                    </Modal>
-                </s.Main>
-            </s.Content>
+                                    <div>
+                                        <s.fieldInput
+                                            type="password"
+                                            placeholder="Insira sua senha"
+                                            onChange={handleChange('senha')}
+                                            onBlur={handleBlur('senha')}
+                                            value={values.senha}
+                                        />
+                                    </div>
+                                    <s.Button type="button" onClick={() => handleSubmit()}>Enviar</s.Button>
+                                    <s.ButtonRight type="button" onClick={() => setModalShow(true)}>Crie sua conta</s.ButtonRight>
+                                </>
+                            )}
+                        </Formik>
+                        <Modal
+                            show={modalShow}
+                            className="RegisterModal"
+                            onHide={() => setModalShow(false)}
+                            size="lg"
+                            aria-labelledby="contained-modal-title-vcenter"
+                            centered
+                        >
+                            <Modal.Body>
+                                <s.Title>Cadastro</s.Title>
+                                <Formik
+                                    enableReinitialize
+                                    onSubmit={handleRegister}
+                                    initialValues={{
+                                        senha: "",
+                                        senhaVerify: "",
+                                        nomeCompleto: "",
+                                        usuario: "",
+                                        email: "",
+                                    }}
+                                >
+                                    {({ handleSubmit, values, setFieldValue, handleChange, handleBlur }) => (
+                                        <>
+                                            <div>
+                                                <s.fieldInput
+                                                    type="text"
+                                                    placeholder="Insira seu nome"
+                                                    onChange={handleChange('nomeCompleto')}
+                                                    onBlur={handleBlur('nomeCompleto')}
+                                                    value={values.nomeCompleto}
+                                                />
+                                            </div>
+                                            <div>
+                                                <s.fieldInput
+                                                    type="text"
+                                                    placeholder="Insira seu email"
+                                                    onChange={handleChange('email')}
+                                                    onBlur={handleBlur('email')}
+                                                    value={values.email}
+                                                />
+                                            </div>
+                                            <div>
+                                                <s.fieldInput
+                                                    type="text"
+                                                    placeholder="Insira seu usuario"
+                                                    onChange={handleChange('usuario')}
+                                                    onBlur={handleBlur('usuario')}
+                                                    value={values.usuario}
+                                                />
+                                            </div>
+                                            <div>
+                                                <s.fieldInput
+                                                    type="password"
+                                                    placeholder="Insira sua senha"
+                                                    onChange={handleChange('senha')}
+                                                    onBlur={handleBlur('senha')}
+                                                    value={values.senha}
+                                                />
+                                            </div>
+                                            <div>
+                                                <s.fieldInput
+                                                    type="password"
+                                                    placeholder="Confirme sua senha"
+                                                    onChange={handleChange('senhaVerify')}
+                                                    onBlur={handleBlur('senhaVerify')}
+                                                    value={values.senhaVerify}
+                                                />
+                                            </div>
+                                            <s.ButtonRegister onClick={() => setModalShow(false)}>Fechar</s.ButtonRegister>
+                                            <s.ButtonRegisterLeft type="button" onClick={() => handleSubmit()}>Enviar</s.ButtonRegisterLeft>
+                                        </>
+                                    )}
+                                </Formik>
+                            </Modal.Body>
+                        </Modal>
+                    </s.Main>
+                </s.Content>
+            </div>
         </>
     );
 };
