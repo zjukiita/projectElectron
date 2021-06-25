@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import api from '../../services/api';
 import path from 'path';
@@ -12,7 +12,7 @@ import Categorias from '../../components/Array'
 
 // Importações de estilos da Navbar
 import { Dropdown, UserImg, Logo, BgImage, Title, BgHover, CategorySection, Star } from './styles';
-import { Navbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl, NavDropdown, Container, Row, Col } from 'react-bootstrap';
 
 const Home = () => {
     const history = useHistory();
@@ -27,15 +27,7 @@ const Home = () => {
     const [search, setSearch] = useState();
     const [storage, setStorage] = useState({});
 
-    const [action, setAction] = useState([]);
-    const [comedy, setComedy] = useState([]);
-    const [terror, setTerror] = useState([]);
-    const [tragedy, setTragedy] = useState([]);
-    const [classic, setClassic] = useState([]);
-    const [romance, setRomance] = useState([]);
-    const [childish, setChildish] = useState([]);
-    const [adventure, setAdventure] = useState([]);
-    const [shortFilm, setShortFilm] = useState([]);
+    const [action, setAction] = useState([]); const [comedy, setComedy] = useState([]); const [terror, setTerror] = useState([]); const [tragedy, setTragedy] = useState([]); const [classic, setClassic] = useState([]); const [romance, setRomance] = useState([]); const [childish, setChildish] = useState([]); const [adventure, setAdventure] = useState([]); const [shortFilm, setShortFilm] = useState([]);
 
     const getStorage = useCallback(async () => {
         try {
@@ -48,8 +40,8 @@ const Home = () => {
 
     const loadingSearch = useCallback(async () => {
         setComedy(comedy.filter(c => c.nome == search));
-    }, [search]);   
-    
+    }, [search]);
+
     const loadingAction = useCallback(async () => {
         try {
             const response = await api.get('/filmes/categoria/Ação');
@@ -115,13 +107,9 @@ const Home = () => {
         }
     }, []);
 
-    useEffect(() => {
-        getStorage();
-    }, [getStorage]);
+    useEffect(() => { getStorage(); }, [getStorage]);
 
-    useEffect(() => {
-        loadingSearch();
-    }, [loadingSearch]);
+    useEffect(() => { loadingSearch(); }, [loadingSearch]);
 
     useEffect(() => {
         loadingAction(), loadingComedy(); loadingTerror(); loadingTragedy(); loadingClassic(); loadingRomance(); loadingChildish(); loadingAdventure(); loadingShortFilm();
@@ -149,16 +137,13 @@ const Home = () => {
                     </NavDropdown>
                 </Nav>
                 <Form inline>
-                    <FormControl
+                    {/* <FormControl
                         type="text"
                         placeholder="Search"
                         className="mr-sm-2"
-                        value={search}
-                        onChange={(e) => { setSearch(e.target.value) }}
-                    />
+                    /> */}
                     <UserImg href="action2" src={storage || ''} />
                     <NavDropdown id="navbarScrollingDropdown">
-                        <Dropdown>Meu Perfil</Dropdown>
                         <Dropdown>Favoritos</Dropdown>
                         <Dropdown onClick={() => history.push('/perfil')}>Trocar Perfil</Dropdown>
                         <Dropdown onClick={() => history.push('/config')}>Configurações</Dropdown>
