@@ -54,7 +54,7 @@ const Modal = ({ id = 'mod', onClose = () => { }, selectedMovie, onUpdate = () =
                 });
                 onUpdate();
                 onClose();
-                alert(JSON.stringify(values, null, 2));
+                // alert(JSON.stringify(values, null, 2));
             } catch (error) {
                 console.log('erro')
             }
@@ -76,6 +76,7 @@ const Modal = ({ id = 'mod', onClose = () => { }, selectedMovie, onUpdate = () =
                         </div>
 
                     ) : (
+                        
                         <form onSubmit={formik.handleSubmit}>
                             <div>
                                 <label htmlFor="nome">Nome</label>
