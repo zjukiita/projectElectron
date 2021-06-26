@@ -18,16 +18,16 @@ const App = () => {
     return (
         <HashRouter>
             <Switch>
-                {/* <Route path="/home" component={Home} />
+                 <Route path="/home" component={Home} />
                 <Route exact path="/" component={Login} />
-                <Route path="/minhalista" component={MyList} />
+                {/* <Route path="/minhalista" component={MyList} /> */}
                 <Route path="/config" component={Config} />
                 <Route path="/perfil" component={Perfil} />
-                <Route path="/categoria" component={Categoria} /> */}
+                <Route path="/categoria" component={Categoria} /> 
 
                 
-                <Route exact path="/" component={DevMovies}/>
-                <Route path="/DevUsers" component={DevUsers}/>
+                {/* <Route exact path="/" component={DevMovies}/>
+                <Route path="/DevUsers" component={DevUsers}/> */}
             </Switch>
         </HashRouter>
     );

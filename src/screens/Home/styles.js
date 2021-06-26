@@ -31,6 +31,7 @@ export const BgImage = styled.div`
     width: 200px;
     height: 280px;
     text-align: center;
+    border: 2px solid #7600a9;
 
     &:hover ${BgHover} {
         opacity: 1;
