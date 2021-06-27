@@ -12,7 +12,6 @@ const Perfil = () => {
         try {
             const storage = await localStorage.getItem('img')
             setStorage(JSON.parse(storage))
-            console.log(storage)
         } catch (error) {
             console.log(error)
         }
@@ -52,7 +51,6 @@ const Perfil = () => {
                             () => {
                                 localStorage.setItem('img', JSON.stringify(p.link))
                                 history.push("/home")
-                                console.log(`Imagem ${p.id} salvada!`)
                             }
                         }>Select This Image</button>
                     </div>

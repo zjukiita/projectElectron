@@ -10,7 +10,6 @@ import Categoria from './Screens/Category';
 
 // Developers Screens
 
-import DevHome from './screens/Developer/DevHome';
 import DevMovies from './screens/Developer/DevMovies';
 import DevUsers from './screens/Developer/DevUsers';
 
@@ -18,14 +17,14 @@ const App = () => {
     return (
         <HashRouter>
             <Switch>
-                <Route path="/home" component={Home} />
+                 <Route path="/home" component={Home} />
                 <Route exact path="/" component={Login} />
                 <Route path="/config" component={Config} />
                 <Route path="/perfil" component={Perfil} />
-                <Route path="/categoria" component={Categoria} />
+                <Route path="/categoria" component={Categoria} /> 
 
-                {/* <Route exact path="/" component={DevHome}/>
-                <Route path="/DevMovies" component={DevMovies}/>
+                
+                {/* <Route exact path="/" component={DevMovies}/>
                 <Route path="/DevUsers" component={DevUsers}/> */}
             </Switch>
         </HashRouter>

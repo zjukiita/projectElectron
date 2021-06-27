@@ -1,15 +1,20 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
+import path from 'path';
+
+// Styled Components
+import { Dropdown, UserImg, Logo} from './styles';
+import { Navbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap';
 
 const Category = () => {
 
     const [movie, setMovie] = useState([]);
-    const [storage, setStorage] = useState({});
 
     const loadingMovies = useCallback(async () => {
         try {
-            const response = await api.get(`/filmes/categoria/Ação`)
+            const storage = localStorage.getItem('category');
+            const response = await api.get(`/filmes/categoria/${storage}`)
             console.log(response)
             if (response.data) setMovie(response.data);
         } catch (error) {
