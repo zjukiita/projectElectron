@@ -38,8 +38,7 @@ const Config = () => {
                     draggable: true,
                     progress: undefined,
                 });
-            }
-
+            };
         } catch (error) {
             if (error instanceof Yup.ValidationError) {
                 toast.warn(error.message, {
@@ -101,7 +100,6 @@ const Config = () => {
                 enableReinitialize
                 onSubmit={handleUpdate}
                 initialValues={{
-                    senha: '',
                     email: storage.email,
                     nomeCompleto: storage.nomeCompleto,
                     usuario: storage.usuario,
