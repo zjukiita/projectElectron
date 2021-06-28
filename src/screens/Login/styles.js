@@ -16,7 +16,7 @@ export const Main = styled.main`
 export const Content = styled.div`
     margin: 0;
     display: flex;
-    height: 100vh;
+    height: 84.5vh;
     align-items: center;
     justify-content: center;
 `

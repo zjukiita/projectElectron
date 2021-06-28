@@ -7,9 +7,11 @@ import { useHistory, Link } from 'react-router-dom';
 
 // Styled Components \\
 import * as s from './styles';
+import { ToastContainer, toast } from 'react-toastify';
 
 // Bootstrap 
 import Modal from 'react-bootstrap/Modal';
+import { isNull } from 'util';
 
 const Login = () => {
     const history = useHistory();
@@ -19,8 +21,8 @@ const Login = () => {
     const handleLogin = useCallback(async (data) => {
         try {
             const schema = Yup.object().shape({
-                email: Yup.string().email('Email inválido!').required('Informe seu E-mail!'),
-                senha: Yup.string().min(6, 'A senha deve conter no mínimo 6 caracteres').required('Informe sua senha!'),
+                email: Yup.string().email('Insira um endereço de email válido').required('Informe seu E-mail!'),
+                senha: Yup.string().required('Insira sua senha do SenacPlay'),
             });
             await schema.validate(data);
             const response = await api.post('/login', data);
@@ -30,14 +32,39 @@ const Login = () => {
                 history.push('/perfil');
             }
             else {
-                alert('Algo de errado aconteceu!')
+                toast.warn(error.message, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
         }
         catch (error) {
             if (error instanceof Yup.ValidationError) {
-                alert(`${error.message}`);
-            };
-            alert('Credencias incorretas!');
+                toast.warn(error.message, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            } else {
+                toast.error('Seu email ou senha estão incorretos!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
         };
     }, []);
 
@@ -51,19 +78,47 @@ const Login = () => {
                 senhaVerify: Yup.string().oneOf([Yup.ref('senha'), null], 'A senhas devem ser iguais!')
             });
             await schema.validate(data);
-            const response = api.post('/users', data);
+            await api.post('/users', data);
             setModalShow(false);
+            toast.success('Cadastrado com sucesso', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
         catch (error) {
             if (error instanceof Yup.ValidationError) {
-                alert(`${error.message}`)
-            };
+                toast.warn(error.message, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            } else {
+                toast.error('Seu email ou senha estão incorretos!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
         };
     }, []);
 
     return (
         <>
             <div className="bgRegister">
+                <ToastContainer />
                 <s.Logo src={path.join(__dirname, '../../assets/logo.png')} />
                 <s.Content className="bg-ticket">
                     <s.Main>

@@ -1,19 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import api from '../../services/api';
+import api from '../../services/api'
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import Modal from 'react-bootstrap/Modal';
 
 // Estilos
-import { ImgProfile, TitleError, FontTag, FontUser, Box } from './styles'
+import { ImgProfile } from './styles';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const Config = () => {
-
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     const [storage, setStorage] = useState({});
     const [imgStorage, setImgStorage] = useState();
@@ -21,35 +17,69 @@ const Config = () => {
     const handleUpdate = useCallback(async (data) => {
         try {
             const schema = Yup.object().shape({
-                email: Yup.string().required('Preencha seu Email!').email('Email não validado!'),
-                usuario: Yup.string().required('Preencha seu usuario!'),
-                senha: Yup.string().required('Preencha sua senha!'),
+                email: Yup.string().required('Insira seu email').email('Insira um endereço de Email válido!'),
+                usuario: Yup.string().required('Insira um nome de usuário'),
+                senha: Yup.string().min(6, 'Sua senha deve conter no minímo 6 caracteres').required()
             });
+
             await schema.validate(data);
             const response = await api.put(`/users/${storage.id}`, data);
             if (response.data) {
+                history.go(0)
                 const jsonData = JSON.stringify(response.data);
                 localStorage.setItem('login', jsonData);
-                alert('Dados atualizados com sucesso!')
-            }
-            else {
-                alert('Algo inesperado aconteceu!')
-            }
+            } else {
+                toast.warn('Algo deu errado na atualização de dados!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            };
         } catch (error) {
-            handleShow();
-            console.log(`Não foi possivel atualizar os dados do usuario! ${error}`)
+            if (error instanceof Yup.ValidationError) {
+                toast.warn(error.message, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            } else {
+                toast.error(`Algo inesperado aconteceu, Tente novamente!`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
         }
     });
 
     const getStorage = useCallback(async () => {
         try {
-            const storage = localStorage.getItem('login');
+            const storage = await localStorage.getItem('login');
             setStorage(JSON.parse(storage));
-            console.log(storage);
-            const imgStorage = localStorage.getItem('img');
+            const imgStorage = await localStorage.getItem('img');
             setImgStorage(JSON.parse(imgStorage));
         } catch (error) {
-            console.log(error)
+            toast.error(`Houve um erro durante o carregamento do LocalStorage! ${error.message}`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
     }, []);
 
@@ -59,64 +89,56 @@ const Config = () => {
 
     return (
         <>
+            <ToastContainer />
             <ImgProfile src={imgStorage || ''} />
-            <h3><FontTag>Nome:</FontTag> <FontUser>{storage.nomeCompleto || ''}</FontUser></h3>
-            <h3><FontTag>Email:</FontTag> <FontUser>{storage.email || ''}</FontUser></h3>
-            <h3><FontTag>Nome de usuário:</FontTag> <FontUser>{storage.usuario || ''}</FontUser></h3>
-            <h5><FontTag><Link to="/home">Voltar a home</Link></FontTag></h5>
-
-            <Modal show={show} className="error" onHide={handleClose}>
-                <Modal.Body className="bg-warning">
-                    <TitleError>Algo deu errado! Preencha os campos novamente!</TitleError>
-                </Modal.Body>
-            </Modal>
+            <h3>Nome: {storage.nomeCompleto || ''}</h3>
+            <h3>Email: {storage.email || ''}</h3>
+            <h3>Nome de usuário: {storage.usuario || ''}</h3>
+            <Link to="/home">Voltar a home</Link>
 
             <Formik
                 enableReinitialize
                 onSubmit={handleUpdate}
                 initialValues={{
-                    senha: '',
                     email: storage.email,
                     nomeCompleto: storage.nomeCompleto,
                     usuario: storage.usuario,
+                    senha: '',
                 }}
             >
                 {({ handleSubmit, values, setFieldValue, handleChange, handleBlur }) => (
                     <>
-                        <FontTag><h2>Atualização de informações</h2></FontTag>
-                        <Box>
-                            <div>
-                                <input
-                                    type="text"
-                                    placeholder="Insira seu email"
-                                    onChange={handleChange('email')}
-                                    onBlur={handleBlur('email')}
-                                    value={values.email}
-                                />
-                            </div>
+                        <h2>Atualização de informações</h2>
+                        <div>
+                            <input
+                                type="text"
+                                placeholder="Insira seu email"
+                                onChange={handleChange('email')}
+                                onBlur={handleBlur('email')}
+                                value={values.email}
+                            />
+                        </div>
 
-                            <div>
-                                <input
-                                    type="text"
-                                    placeholder="Insira seu usuário"
-                                    onChange={handleChange('usuario')}
-                                    onBlur={handleBlur('usuario')}
-                                    value={values.usuario}
-                                />
-                            </div>
+                        <div>
+                            <input
+                                type="text"
+                                placeholder="Insira seu usuário"
+                                onChange={handleChange('usuario')}
+                                onBlur={handleBlur('usuario')}
+                                value={values.usuario}
+                            />
+                        </div>
 
-                            <div>
-                                <input
-                                    type="password"
-                                    placeholder="Insira sua senha"
-                                    onChange={handleChange('senha')}
-                                    onBlur={handleBlur('senha')}
-                                    value={values.senha}
-                                />
-                            </div>
-
-                            <button type="button" onClick={() => handleSubmit()}>Enviar</button>
-                        </Box>
+                        <div>
+                            <input
+                                type="password"
+                                placeholder="Insira sua senha"
+                                onChange={handleChange('senha')}
+                                onBlur={handleBlur('senha')}
+                                value={values.senha}
+                            />
+                        </div>
+                        <button type="button" onClick={() => handleSubmit()}>Enviar</button>
                     </>
                 )}
             </Formik>
