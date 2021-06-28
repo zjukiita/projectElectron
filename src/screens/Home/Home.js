@@ -6,6 +6,7 @@ import path from 'path';
 
 // Importação dos componentes
 import MainCarousel from '../../components/HomeComponents/MainCarousel';
+import Modal from 'react-bootstrap/Modal'
 
 //Importação da Array de categorias
 import Categorias from '../../components/Array'
@@ -26,6 +27,7 @@ const Home = () => {
 
     const [search, setSearch] = useState();
     const [storage, setStorage] = useState({});
+    const [modalShow, setModalShow] = useState(false);
 
     const [action, setAction] = useState([]); const [comedy, setComedy] = useState([]); const [terror, setTerror] = useState([]); const [tragedy, setTragedy] = useState([]); const [classic, setClassic] = useState([]); const [romance, setRomance] = useState([]); const [childish, setChildish] = useState([]); const [adventure, setAdventure] = useState([]); const [shortFilm, setShortFilm] = useState([]);
 
@@ -168,6 +170,20 @@ const Home = () => {
                             <BgImage key={a.id} style={{ backgroundImage: `url(${a.imagem})` }}>
                                 <BgHover>
                                     <Title>{a.nome}</Title>
+                                    <button onClick={() => setModalShow(true)}>Assistir</button>
+                                    <Modal
+                                        show={modalShow}
+                                        onHide={() => setModalShow(false)}
+                                        size="lg"
+                                        aria-labelledby="contained-modal-title-vcenter"
+                                        centered
+                                    >
+                                        <Modal.Header>
+                                            <Modal.Body>
+
+                                            </Modal.Body>
+                                        </Modal.Header>
+                                    </Modal>
                                 </BgHover>
                             </BgImage>
                         );
