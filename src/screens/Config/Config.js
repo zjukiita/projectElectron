@@ -18,13 +18,12 @@ const Config = () => {
         try {
             const schema = Yup.object().shape({
                 email: Yup.string().required('Insira seu email').email('Insira um endereço de Email válido!'),
-                usuario: Yup.string.required('Insira um nome de usuário'),
+                usuario: Yup.string().required('Insira um nome de usuário'),
                 senha: Yup.string().min(6, 'Sua senha deve conter no minímo 6 caracteres').required()
             });
 
             await schema.validate(data);
             const response = await api.put(`/users/${storage.id}`, data);
-
             if (response.data) {
                 history.go(0)
                 const jsonData = JSON.stringify(response.data);
@@ -53,7 +52,7 @@ const Config = () => {
                     progress: undefined,
                 });
             } else {
-                toast.error('Algo inesperado aconteceu, Tente novamente!', {
+                toast.error(`Algo inesperado aconteceu, Tente novamente!`, {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
