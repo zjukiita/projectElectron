@@ -10,7 +10,7 @@ const MovieCard = ({ movie }) => {
     const [modalShow, setModalShow] = useState(false);
 
     return (
-        <>
+        <div>
             <BgImage style={{ backgroundImage: `url(${movie.imagem})` }}>
                 <BgHover>
                     <Title>{movie.nome}</Title>
@@ -22,14 +22,25 @@ const MovieCard = ({ movie }) => {
                         aria-labelledby="contained-modal-title-vcenter"
                         centered
                     >
-                        <Modal.Body>
-                            <Title>{movie.link}</Title>
+
+                        <Modal.Body
+                            style={{
+                                display: "flex",
+                                position: 'fixed',
+                                justifyContent: 'center',
+                                width: '60vw',
+                                height: '60vw'
+                            }}>
+                            <webview
+                                src={movie.link}
+                            >
+                            </webview>
                         </Modal.Body>
                     </Modal>
                 </BgHover>
             </BgImage>
-        </>
-    );
-};
+        </div>
+    )
+}
 
 export default MovieCard;

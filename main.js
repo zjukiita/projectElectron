@@ -13,6 +13,7 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     show: false,
     webPreferences: {
+      webviewTag: true,
       nodeIntegration: true,
       webSecurity: process.env.NODE_ENV !== 'development',
     }
