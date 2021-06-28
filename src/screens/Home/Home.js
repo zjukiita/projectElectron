@@ -28,7 +28,6 @@ const Home = () => {
 
     const [search, setSearch] = useState();
     const [storage, setStorage] = useState({});
-    const [modalShow, setModalShow] = useState(false);
 
     const [action, setAction] = useState([]); const [comedy, setComedy] = useState([]); const [terror, setTerror] = useState([]); const [tragedy, setTragedy] = useState([]); const [classic, setClassic] = useState([]); const [romance, setRomance] = useState([]); const [childish, setChildish] = useState([]); const [adventure, setAdventure] = useState([]); const [shortFilm, setShortFilm] = useState([]);
 
