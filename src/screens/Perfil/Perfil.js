@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import { ImgProfile } from './styles';
+import { ImgProfile, Button, Title, BackToHome } from './styles';
 
 const Perfil = () => {
     const history = useHistory();
@@ -42,21 +42,28 @@ const Perfil = () => {
 
     return (
         <>
-            <h2>Escolha seu perfil</h2>
+            <Title>Escolha seu perfil</Title>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                }}>
             {ProfileImages.map(p => {
                 return (
-                    <div key={p.id}>
+                    <div style={{justifyContent: 'center', display: 'flex', flexDirection: 'column', marginRight: '30px'}} key={p.id}>
                         <ImgProfile src={p.link} />
-                        <button onClick={
+                        <Button onClick={
                             () => {
                                 localStorage.setItem('img', JSON.stringify(p.link))
                                 history.push("/home")
                             }
-                        }>Select This Image</button>
+                        }>Selecione essa imagem</Button>
                     </div>
                 );
             })}
-            <Link to="/home">Voltar a home</Link>
+            </div>
+            <BackToHome><Link to="/home">Voltar a home</Link></BackToHome>
         </>
     )
 };
