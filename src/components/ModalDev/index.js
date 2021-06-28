@@ -15,8 +15,8 @@ const Modal = ({ id = 'mod', onClose = () => { }, selectedMovie, onUpdate = () =
     }, [selectedMovie]);
 
     const handleOutsideClick = (e) => {
-        if (e.target.id === id) 
-        onClose();
+        if (e.target.id === id)
+            onClose();
     };
 
     const formik = useFormik({
@@ -76,90 +76,128 @@ const Modal = ({ id = 'mod', onClose = () => { }, selectedMovie, onUpdate = () =
                         </div>
 
                     ) : (
-                        
-                        <form onSubmit={formik.handleSubmit}>
-                            <div>
-                                <label htmlFor="nome">Nome</label>
-                                <input
-                                    id="nome"
-                                    type="text"
-                                    {...formik.getFieldProps('nome')}
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="imagem">Imagem</label>
-                                <input
-                                    id="imagem"
-                                    type="text"
-                                    {...formik.getFieldProps('imagem')}
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="sinopse">Sinopse</label>
-                                <input
-                                    id="sinopse"
-                                    type="text"
-                                    {...formik.getFieldProps('sinopse')}
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="duracao">Duração</label>
-                                <input
-                                    id="duracao"
-                                    type="text"
-                                    {...formik.getFieldProps('duracao')}
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="link">Link</label>
-                                <input
-                                    id="link"
-                                    type="text"
-                                    {...formik.getFieldProps('link')}
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="trailer">Trailer</label>
-                                <input
-                                    id="trailer"
-                                    type="text"
-                                    {...formik.getFieldProps('trailer')}
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="avaliacao">Avaliação</label>
-                                <input
-                                    id="avaliacao"
-                                    type="text"
-                                    {...formik.getFieldProps('avaliacao')}
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="anoDeLancamento">Lançamento</label>
-                                <input
-                                    id="anoDeLancamento"
-                                    type="text"
-                                    {...formik.getFieldProps('anoDeLancamento')}
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="categoria">Categoria</label>
-                                <input
-                                    id="categoria"
-                                    type="text"
-                                    {...formik.getFieldProps('categoria')}
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="classificacao">Classificação</label>
-                                <input
-                                    id="classificacao"
-                                    type="text"
-                                    {...formik.getFieldProps('classificacao')}
-                                />
-                            </div>
-                            <button type="submit" >Enviar</button>
-                        </form>
+
+                        <div style={{
+                            display: "flex",
+                            color: "#fff",
+                            justifyContent: "center"
+
+                        }} >
+                            <form onSubmit={formik.handleSubmit}>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    
+                                }}>
+                                    <label htmlFor="nome">Nome</label>
+                                    <input
+                                        id="nome"
+                                        type="text"
+                                        {...formik.getFieldProps('nome')}
+                                    />
+                                </div>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "column"
+                                }}>
+                                    <label htmlFor="imagem">Imagem</label>
+                                    <input
+                                        id="imagem"
+                                        type="text"
+                                        {...formik.getFieldProps('imagem')}
+                                    />
+                                </div>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "column"
+                                }}>
+                                    <label htmlFor="sinopse">Sinopse</label>
+                                    <input
+                                        id="sinopse"
+                                        type="text"
+                                        {...formik.getFieldProps('sinopse')}
+                                    />
+                                </div>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "column"
+                                }}>
+                                    <label htmlFor="duracao">Duração</label>
+                                    <input
+                                        id="duracao"
+                                        type="text"
+                                        {...formik.getFieldProps('duracao')}
+                                    />
+                                </div>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "column"
+                                }}>
+                                    <label htmlFor="link">Link</label>
+                                    <input
+                                        id="link"
+                                        type="text"
+                                        {...formik.getFieldProps('link')}
+                                    />
+                                </div>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "column"
+                                }}>
+                                    <label htmlFor="trailer">Trailer</label>
+                                    <input
+                                        id="trailer"
+                                        type="text"
+                                        {...formik.getFieldProps('trailer')}
+                                    />
+                                </div>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "column"
+                                }}>
+                                    <label htmlFor="avaliacao">Avaliação</label>
+                                    <input
+                                        id="avaliacao"
+                                        type="text"
+                                        {...formik.getFieldProps('avaliacao')}
+                                    />
+                                </div>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "column"
+                                }}>
+                                    <label htmlFor="anoDeLancamento">Lançamento</label>
+                                    <input
+                                        id="anoDeLancamento"
+                                        type="text"
+                                        {...formik.getFieldProps('anoDeLancamento')}
+                                    />
+                                </div>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "column"
+                                }}>
+                                    <label htmlFor="categoria">Categoria</label>
+                                    <input
+                                        id="categoria"
+                                        type="text"
+                                        {...formik.getFieldProps('categoria')}
+                                    />
+                                </div>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "column"
+                                }}>
+                                    <label htmlFor="classificacao">Classificação</label>
+                                    <input
+                                        id="classificacao"
+                                        type="text"
+                                        {...formik.getFieldProps('classificacao')}
+                                    />
+                                </div>
+                                <button type="submit" >Enviar</button>
+                            </form>
+                        </div>
                     )}
                 </Container>
             </Modaal>
