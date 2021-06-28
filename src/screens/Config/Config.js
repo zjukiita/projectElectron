@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 // Estilos
-import { ImgProfile, FontTag, FontUser, BackHome, Box } from './styles';
+import { ImgProfile, FontTag, FontUser, BackHome, Box, ButtonRight } from './styles';
 import { ToastContainer, toast } from 'react-toastify';
 
 
@@ -93,7 +93,7 @@ const Config = () => {
             <ImgProfile src={imgStorage || ''} />
             <h3><FontTag>Nome:</FontTag><FontUser>{storage.nomeCompleto || ''}</FontUser></h3>
             <h3><FontTag>Email:</FontTag><FontUser> {storage.email || ''}</FontUser></h3>
-            <h3><FontTag>Nome de usuário:</FontTag><FontUser>{storage.usuario || ''}</FontUser></h3>
+            <h3><FontTag>Nome de usuário: </FontTag><FontUser>{ storage.usuario || ''}</FontUser></h3>
             <Link to="/home"><BackHome>Voltar para a home</BackHome></Link>
 
             <Formik
@@ -109,36 +109,36 @@ const Config = () => {
                 {({ handleSubmit, values, setFieldValue, handleChange, handleBlur }) => (
                     <>
                         <h2><FontTag>Atualização de informações</FontTag></h2>
-                        <Box>
-                            <input
+                        <div>
+                            <Box
                                 type="text"
                                 placeholder="Insira seu email"
                                 onChange={handleChange('email')}
                                 onBlur={handleBlur('email')}
                                 value={values.email}
                             />
-                        </Box>
+                        </div>
 
-                        <Box>
-                            <input
+                        <div>
+                            <Box
                                 type="text"
                                 placeholder="Insira seu usuário"
                                 onChange={handleChange('usuario')}
                                 onBlur={handleBlur('usuario')}
                                 value={values.usuario}
                             />
-                        </Box>
+                        </div>
 
-                        <Box>
-                            <input
+                        <div>
+                            <Box
                                 type="password"
                                 placeholder="Insira sua senha"
                                 onChange={handleChange('senha')}
                                 onBlur={handleBlur('senha')}
                                 value={values.senha}
                             />
-                        </Box>
-                        <Box><button type="button" onClick={() => handleSubmit()}>Enviar</button></Box>
+                        </div>
+                        <ButtonRight type="button" onClick={() => handleSubmit()}>Enviar</ButtonRight>
                     </>
                 )}
             </Formik>
