@@ -19,4 +19,9 @@ export const FontUser = styled.label`
 export const Box = styled.div`
    margin-left: 10px;
    margin-top: 5px;;
+` 
+export const BackHome = styled.label`
+   color: #fff;
+   font-size: 1.5vw;
+   margin-left: 10px;
 `

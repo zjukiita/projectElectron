@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 // Estilos
-import { ImgProfile } from './styles';
+import { ImgProfile, FontTag, FontUser, BackHome, Box } from './styles';
 import { ToastContainer, toast } from 'react-toastify';
 
 
@@ -91,10 +91,10 @@ const Config = () => {
         <>
             <ToastContainer />
             <ImgProfile src={imgStorage || ''} />
-            <h3>Nome: {storage.nomeCompleto || ''}</h3>
-            <h3>Email: {storage.email || ''}</h3>
-            <h3>Nome de usuário: {storage.usuario || ''}</h3>
-            <Link to="/home">Voltar a home</Link>
+            <h3><FontTag>Nome:</FontTag><FontUser>{storage.nomeCompleto || ''}</FontUser></h3>
+            <h3><FontTag>Email:</FontTag><FontUser> {storage.email || ''}</FontUser></h3>
+            <h3><FontTag>Nome de usuário:</FontTag><FontUser>{storage.usuario || ''}</FontUser></h3>
+            <Link to="/home"><BackHome>Voltar para a home</BackHome></Link>
 
             <Formik
                 enableReinitialize
@@ -108,8 +108,8 @@ const Config = () => {
             >
                 {({ handleSubmit, values, setFieldValue, handleChange, handleBlur }) => (
                     <>
-                        <h2>Atualização de informações</h2>
-                        <div>
+                        <h2><FontTag>Atualização de informações</FontTag></h2>
+                        <Box>
                             <input
                                 type="text"
                                 placeholder="Insira seu email"
@@ -117,9 +117,9 @@ const Config = () => {
                                 onBlur={handleBlur('email')}
                                 value={values.email}
                             />
-                        </div>
+                        </Box>
 
-                        <div>
+                        <Box>
                             <input
                                 type="text"
                                 placeholder="Insira seu usuário"
@@ -127,9 +127,9 @@ const Config = () => {
                                 onBlur={handleBlur('usuario')}
                                 value={values.usuario}
                             />
-                        </div>
+                        </Box>
 
-                        <div>
+                        <Box>
                             <input
                                 type="password"
                                 placeholder="Insira sua senha"
@@ -137,8 +137,8 @@ const Config = () => {
                                 onBlur={handleBlur('senha')}
                                 value={values.senha}
                             />
-                        </div>
-                        <button type="button" onClick={() => handleSubmit()}>Enviar</button>
+                        </Box>
+                        <Box><button type="button" onClick={() => handleSubmit()}>Enviar</button></Box>
                     </>
                 )}
             </Formik>
