@@ -33,7 +33,7 @@ const Perfil = () => {
         {
             id: 4,
             link: "https://i.pinimg.com/originals/6f/06/52/6f0652369f39ec5aab17fc1e29377c6a.png"
-        }
+        },
     ];
 
     useEffect(() => {

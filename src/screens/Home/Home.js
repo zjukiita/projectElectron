@@ -3,6 +3,7 @@ import { useHistory, Link } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import api from '../../services/api';
 import path from 'path';
+import MovieCard from '../../components/HomeComponents/MovieCard';
 
 // Importação dos componentes
 import MainCarousel from '../../components/HomeComponents/MainCarousel';
@@ -12,7 +13,7 @@ import Modal from 'react-bootstrap/Modal'
 import Categorias from '../../components/Array'
 
 // Importações de estilos da Navbar
-import { Dropdown, UserImg, Logo, BgImage, Title, BgHover, CategorySection, Star } from './styles';
+import { Dropdown, UserImg, Logo, BgImage, Title, BgHover, CategorySection, Button } from './styles';
 import { Navbar, Nav, Form, FormControl, NavDropdown, Container, Row, Col } from 'react-bootstrap';
 
 const Home = () => {
@@ -167,25 +168,9 @@ const Home = () => {
                 >
                     {action.map(a => {
                         return (
-                            <BgImage key={a.id} style={{ backgroundImage: `url(${a.imagem})` }}>
-                                <BgHover>
-                                    <Title>{a.nome}</Title>
-                                    <button onClick={() => setModalShow(true)}>Assistir</button>
-                                    <Modal
-                                        show={modalShow}
-                                        onHide={() => setModalShow(false)}
-                                        size="lg"
-                                        aria-labelledby="contained-modal-title-vcenter"
-                                        centered
-                                    >
-                                        <Modal.Header>
-                                            <Modal.Body>
-
-                                            </Modal.Body>
-                                        </Modal.Header>
-                                    </Modal>
-                                </BgHover>
-                            </BgImage>
+                            <div key={a.id}>
+                                <MovieCard movie={a} />
+                            </div>
                         );
                     })}
                 </Carousel>
@@ -201,11 +186,9 @@ const Home = () => {
                 >
                     {comedy.map(c => {
                         return (
-                            <BgImage key={c.id} style={{ backgroundImage: `url(${c.imagem})` }}>
-                                <BgHover>
-                                    <Title>{c.nome}</Title>
-                                </BgHover>
-                            </BgImage>
+                            <div key={c.id}>
+                                <MovieCard movie={c} />
+                            </div>
                         );
                     })}
                 </Carousel>
@@ -221,11 +204,9 @@ const Home = () => {
                 >
                     {adventure.map(ad => {
                         return (
-                            <BgImage key={ad.id} style={{ backgroundImage: `url(${ad.imagem})` }}>
-                                <BgHover>
-                                    <Title>{ad.nome}</Title>
-                                </BgHover>
-                            </BgImage>
+                            <div key={ad.id}>
+                                <MovieCard movie={ad} />
+                            </div>
                         );
                     })}
                 </Carousel>
@@ -241,11 +222,9 @@ const Home = () => {
                 >
                     {terror.map(t => {
                         return (
-                            <BgImage key={t.id} style={{ backgroundImage: `url(${t.imagem})` }}>
-                                <BgHover>
-                                    <Title>{t.nome}</Title>
-                                </BgHover>
-                            </BgImage>
+                            <div key={t.id}>
+                                <MovieCard movie={t} />
+                            </div>
                         );
                     })}
                 </Carousel>
@@ -261,11 +240,9 @@ const Home = () => {
                 >
                     {romance.map(r => {
                         return (
-                            <BgImage key={r.id} style={{ backgroundImage: `url(${r.imagem})` }}>
-                                <BgHover>
-                                    <Title>{r.nome}</Title>
-                                </BgHover>
-                            </BgImage>
+                            <div key={r.id}>
+                                <MovieCard movie={r} />
+                            </div>
                         );
                     })}
                 </Carousel>
@@ -281,11 +258,9 @@ const Home = () => {
                 >
                     {classic.map(cl => {
                         return (
-                            <BgImage key={cl.id} style={{ backgroundImage: `url(${cl.imagem})` }}>
-                                <BgHover>
-                                    <Title>{cl.nome}</Title>
-                                </BgHover>
-                            </BgImage>
+                            <div key={cl.id}>
+                                <MovieCard movie={cl} />
+                            </div>
                         );
                     })}
                 </Carousel>
@@ -301,11 +276,9 @@ const Home = () => {
                 >
                     {childish.map(ch => {
                         return (
-                            <BgImage key={ch.id} style={{ backgroundImage: `url(${ch.imagem})` }}>
-                                <BgHover>
-                                    <Title>{ch.nome}</Title>
-                                </BgHover>
-                            </BgImage>
+                            <div key={ch.id}>
+                                <MovieCard movie={ch} />
+                            </div>
                         );
                     })}
                 </Carousel>
@@ -321,11 +294,9 @@ const Home = () => {
                 >
                     {tragedy.map(tr => {
                         return (
-                            <BgImage key={tr.id} style={{ backgroundImage: `url(${tr.imagem})` }}>
-                                <BgHover>
-                                    <Title>{tr.nome}</Title>
-                                </BgHover>
-                            </BgImage>
+                            <div key={tr.id}>
+                                <MovieCard movie={tr} />
+                            </div>
                         );
                     })}
                 </Carousel>
@@ -341,11 +312,9 @@ const Home = () => {
                 >
                     {shortFilm.map(sf => {
                         return (
-                            <BgImage key={sf.id} style={{ backgroundImage: `url(${sf.imagem})` }}>
-                                <BgHover>
-                                    <Title>{sf.nome}</Title>
-                                </BgHover>
-                            </BgImage>
+                            <div key={sf.id}>
+                                <MovieCard movie={sf} />
+                            </div>
                         );
                     })}
                 </Carousel>
