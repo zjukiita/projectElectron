@@ -25,13 +25,14 @@ const MovieCard = ({ movie }) => {
 
                         <Modal.Body
                             style={{
-                                display: "flex",
-                                position: 'fixed',
-                                justifyContent: 'center',
-                                width: '60vw',
-                                height: '60vw'
+                                width: '90vw',
+                                height: '50vw'
                             }}>
                             <webview
+                            style={{
+                                width: '60vw',
+                                height: '30vw'
+                            }}
                                 src={movie.link}
                             >
                             </webview>
