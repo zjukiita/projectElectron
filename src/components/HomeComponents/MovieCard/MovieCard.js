@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 
 // Styled Component
-import { BgHover, BgImage, Title, Button } from './styles';
-
+import { BgHover, BgImage, Title, Button, View } from './styles';
 
 const MovieCard = ({ movie }) => {
 
@@ -17,22 +16,14 @@ const MovieCard = ({ movie }) => {
                     <Button onClick={() => setModalShow(true)}>Play <i className="fas fa-play"></i></Button>
                     <Modal
                         show={modalShow}
+                        className="bgModal"
                         onHide={() => setModalShow(false)}
-                        size="lg"
+                        size="xl"
                         aria-labelledby="contained-modal-title-vcenter"
                         centered
                     >
-
-                        <Modal.Body
-                            style={{
-                                width: '90vw',
-                                height: '50vw'
-                            }}>
+                        <Modal.Body>
                             <webview
-                            style={{
-                                width: '60vw',
-                                height: '30vw'
-                            }}
                                 src={movie.link}
                             >
                             </webview>
