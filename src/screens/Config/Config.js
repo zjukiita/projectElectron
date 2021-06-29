@@ -1,15 +1,22 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import api from '../../services/api'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 // Estilos
-import { ImgProfile, FontTag, FontUser, BackHome, Box, ButtonRight } from './styles';
-import { ToastContainer, toast } from 'react-toastify';
+import { ImgProfile,Box, ButtonRight, ImgDiv, Info, Back, TitleInfo, Title } from './styles';
+import { ToastContainer, toast, collapseToast } from 'react-toastify';
 
+// React Boostrap 
+import { Container, Row, Col } from 'react-bootstrap'
 
 const Config = () => {
+    const history = useHistory();
+
+    const backHome = () => {
+        history.push('/home')
+    }
 
     const [storage, setStorage] = useState({});
     const [imgStorage, setImgStorage] = useState();
@@ -66,9 +73,9 @@ const Config = () => {
 
     const getStorage = useCallback(async () => {
         try {
-            const storage = await localStorage.getItem('login');
+            const storage = localStorage.getItem('login');
             setStorage(JSON.parse(storage));
-            const imgStorage = await localStorage.getItem('img');
+            const imgStorage = localStorage.getItem('img');
             setImgStorage(JSON.parse(imgStorage));
         } catch (error) {
             toast.error(`Houve um erro durante o carregamento do LocalStorage! ${error.message}`, {
@@ -89,59 +96,74 @@ const Config = () => {
 
     return (
         <>
+            <Back onClick={backHome}><i className="fas fa-arrow-left"></i></Back>
             <ToastContainer />
-            <ImgProfile src={imgStorage || ''} />
-            <h3><FontTag>Nome:</FontTag><FontUser>{storage.nomeCompleto || ''}</FontUser></h3>
-            <h3><FontTag>Email:</FontTag><FontUser> {storage.email || ''}</FontUser></h3>
-            <h3><FontTag>Nome de usuário: </FontTag><FontUser>{ storage.usuario || ''}</FontUser></h3>
-            <Link to="/home"><BackHome>Voltar para a home</BackHome></Link>
+            <Container>
 
-            <Formik
-                enableReinitialize
-                onSubmit={handleUpdate}
-                initialValues={{
-                    email: storage.email,
-                    nomeCompleto: storage.nomeCompleto,
-                    usuario: storage.usuario,
-                    senha: '',
-                }}
-            >
-                {({ handleSubmit, values, setFieldValue, handleChange, handleBlur }) => (
-                    <>
-                        <h2><FontTag>Atualização de informações</FontTag></h2>
-                        <div>
-                            <Box
-                                type="text"
-                                placeholder="Insira seu email"
-                                onChange={handleChange('email')}
-                                onBlur={handleBlur('email')}
-                                value={values.email}
-                            />
-                        </div>
+                <ImgDiv>
+                    <ImgProfile src={imgStorage || ''} />
+                </ImgDiv>
+                <Container>
+                    <Row>
+                        <Col md={12}>
+                            <Info><TitleInfo>Nome:</TitleInfo>{storage.nomeCompleto || ''}</Info>
+                            <Info><TitleInfo>Nome de usuário:</TitleInfo>{storage.usuario || ''}</Info>
+                            <Info><TitleInfo>Email:</TitleInfo>{storage.email || ''}</Info>
+                        </Col>
+                    </Row>
+                </Container>
 
-                        <div>
-                            <Box
-                                type="text"
-                                placeholder="Insira seu usuário"
-                                onChange={handleChange('usuario')}
-                                onBlur={handleBlur('usuario')}
-                                value={values.usuario}
-                            />
-                        </div>
+                <Formik
+                    enableReinitialize
+                    onSubmit={handleUpdate}
+                    initialValues={{
+                        email: storage.email,
+                        nomeCompleto: storage.nomeCompleto,
+                        usuario: storage.usuario,
+                        senha: '',
+                    }}
+                >
+                    {({ handleSubmit, values, setFieldValue, handleChange, handleBlur }) => (
+                        <>
+                            <Container className="updateInfoConfig">
+                                <Title>Atualização de informações</Title>
+                                <Row>
+                                    <Col md={{ span: 6, offset: 3 }}>
+                                        <Box
+                                            type="text"
+                                            placeholder="Insira seu email"
+                                            onChange={handleChange('email')}
+                                            onBlur={handleBlur('email')}
+                                            value={values.email}
+                                        />
+                                    </Col>
 
-                        <div>
-                            <Box
-                                type="password"
-                                placeholder="Insira sua senha"
-                                onChange={handleChange('senha')}
-                                onBlur={handleBlur('senha')}
-                                value={values.senha}
-                            />
-                        </div>
-                        <ButtonRight type="button" onClick={() => handleSubmit()}>Enviar</ButtonRight>
-                    </>
-                )}
-            </Formik>
+                                    <Col md={{ span: 6, offset: 3 }}>
+                                        <Box
+                                            type="text"
+                                            placeholder="Insira seu usuário"
+                                            onChange={handleChange('usuario')}
+                                            onBlur={handleBlur('usuario')}
+                                            value={values.usuario}
+                                        />
+                                    </Col>
+
+                                    <Col md={{ span: 6, offset: 3 }}>
+                                        <Box
+                                            type="password"
+                                            placeholder="Insira sua senha"
+                                            onChange={handleChange('senha')}
+                                            onBlur={handleBlur('senha')}
+                                            value={values.senha}
+                                        />
+                                    </Col>
+                                </Row>
+                                <ButtonRight type="button" onClick={() => handleSubmit()}>Enviar</ButtonRight>
+                            </Container>
+                        </>
+                    )}
+                </Formik>
+            </Container>
         </>
     )
 }

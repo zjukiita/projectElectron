@@ -47,6 +47,10 @@ body {
     background-color: transparent !important;
 }
 
+.updateInfoConfig {
+    text-align: center;
+}
+
 webview {
     height: 55vh;
 }

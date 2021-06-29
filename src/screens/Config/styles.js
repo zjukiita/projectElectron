@@ -1,30 +1,47 @@
 import styled, { css } from 'styled-components';
 
+export const Back = styled.button`
+    border: none;
+    display: flex;
+    align-items: center;
+    height: 12vh;
+    margin-left: 50px;
+    transition: 1s;
+    color: #7600a9;
+    font-size: 24px;
+    background-color: transparent;
+
+    &:hover {
+        font-size: 32px;
+    }
+`
+export const ImgDiv = styled.div`
+    text-align: center;
+`
 export const ImgProfile = styled.img`
     width: 180px;
     border-radius: 50%;
 `
-export const TitleError = styled.h5`
-    margin: 0;
+export const Title = styled.h2`
+    color: #7600a9
 `
-export const FontTag = styled.label`
+export const TitleInfo = styled.label`
    color: #7600a9;
    font-size: 1.5vw;
-   margin-left: 10px;
+   text-align: center;
 `
-export const FontUser = styled.label`
-   color: #fff;
-   font-size: 1.5vw;
-   margin-left: 7px;
+export const Info = styled.h4`
+    color: #fff;
+    font-size: 1.5vw;
+    text-align: center;
 `
 export const Box = styled.input`
-    width: 16%;
+    width: 100%;
     color: white;
-    height: 45px;
+    height: 50px;
     border: none;
     outline: none;
-    margin-left: 10px;
-    margin-top: 5px;;
+    margin-top: 15px;;
     background-color: #363636;
 `
 export const BackHome = styled.label`
@@ -51,6 +68,6 @@ export const ButtonRight = styled.button`
     &:hover {
         color: #7600a9;
         border: 2px #7600a9 solid;
-        background-color: #363636;
+        background-color: transparent;
     }
 `

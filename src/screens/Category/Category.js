@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import path from 'path';
+import MovieCard from '../../components/HomeComponents/MovieCard'
 
 // Styled Components
 import { MovieDiv, Col, Img } from './styles';
@@ -33,9 +34,9 @@ const Category = () => {
                 <Row>
                     {movie.map(m => {
                         return (
-                            <Col key={m.id}>
-                                <Img src={m.imagem} />
-                            </Col>
+                            <div key={m.id}>
+                                <MovieCard movie={m} />
+                            </div>
                         );
                     })}
                 </Row>

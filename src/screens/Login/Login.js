@@ -71,7 +71,7 @@ const Login = () => {
     const handleRegister = useCallback(async (data) => {
         try {
             const schema = Yup.object().shape({
-                nomeCompleto: Yup.string().required('Campo "nome" obrigatório!'),
+                nomeCompleto: Yup.string().min(6, 'Preencha seu nome completo').required('Campo "nome" obrigatório!'),
                 email: Yup.string().email('Email não encontrado!').required('Campo "email" obrigatório'),
                 usuario: Yup.string().required('Campo "usuário" obrigatório'),
                 senha: Yup.string().min(6, 'A senha deve conter no mínimo 6 caracteres').required('Campo "senha"obrigatório'),

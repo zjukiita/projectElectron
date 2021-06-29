@@ -1,7 +1,9 @@
+import { Tooltip } from 'bootstrap';
 import React, { useEffect, useState, useCallback } from 'react';
+import { OverlayTrigger } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 
-import { ImgProfile, Button, Title, BackToHome } from './styles';
+import { ImgProfile, Button, Title, ImagesProfile, Content, Back, TitleBack } from './styles';
 
 const Perfil = () => {
     const history = useHistory();
@@ -17,21 +19,29 @@ const Perfil = () => {
         }
     }, []);
 
+    const backHome = () => {
+        history.push('/')
+    }
+
     const ProfileImages = [
         {
             id: 1,
+            nome: "Perfil 01",
             link: "https://i.imgur.com/2ezz7tz.png"
         },
         {
             id: 2,
+            nome: "Perfil 02",
             link: "https://sguru.org/wp-content/uploads/2017/06/steam-avatar-profile-picture-1003.jpg"
         },
         {
             id: 3,
+            nome: "Perfil 03",
             link: "https://sguru.org/wp-content/uploads/2017/06/steam-avatar-profile-picture-1773.jpg"
         },
         {
             id: 4,
+            nome: "Perfil 04",
             link: "https://i.pinimg.com/originals/6f/06/52/6f0652369f39ec5aab17fc1e29377c6a.png"
         },
     ];
@@ -42,28 +52,30 @@ const Perfil = () => {
 
     return (
         <>
-            <Title>Escolha seu perfil</Title>
-            <div style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
+            <Back onClick={backHome}><i className="fas fa-arrow-left"></i><TitleBack>Logout</TitleBack></Back>
+            <Content>
+                <Title>Escolha seu perfil</Title>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                 }}>
-            {ProfileImages.map(p => {
-                return (
-                    <div style={{justifyContent: 'center', display: 'flex', flexDirection: 'column', marginRight: '30px'}} key={p.id}>
-                        <ImgProfile src={p.link} />
-                        <Button onClick={
-                            () => {
-                                localStorage.setItem('img', JSON.stringify(p.link))
-                                history.push("/home")
-                            }
-                        }>Selecione essa imagem</Button>
-                    </div>
-                );
-            })}
-            </div>
-            <BackToHome><Link to="/home">Voltar a home</Link></BackToHome>
+                    {ProfileImages.map(p => {
+                        return (
+                            <ImagesProfile key={p.id}>
+                                <ImgProfile onClick={
+                                    () => {
+                                        localStorage.setItem('img', JSON.stringify(p.link))
+                                        history.push("/home")
+                                    }
+                                } src={p.link} />
+                                <Title>{p.nome}</Title>
+                            </ImagesProfile>
+                        );
+                    })}
+                </div>
+            </Content>
         </>
     )
 };
