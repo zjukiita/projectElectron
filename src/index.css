@@ -42,6 +42,15 @@ body {
     margin-bottom: 35px;
 }
 
+.bgModal .modal-content {
+    border: none;
+    background-color: transparent !important;
+}
+
+webview {
+    height: 55vh;
+}
+
 
 
 
