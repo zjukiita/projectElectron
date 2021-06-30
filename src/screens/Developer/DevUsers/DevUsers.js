@@ -3,7 +3,7 @@ import GlobalMenuDev from '../../../components/GlobalMenuDev';
 import UsersDev from '../../../components/UsersDev';
 import Modal from '../../../components/ModalUsers';
 import api from '../../../services/api';
-import { Button } from './styles';
+import { Button, Box } from './styles';
 
 const DevUsers = () => {
 
@@ -42,9 +42,7 @@ const DevUsers = () => {
         if (search === '') {
             setFilter(user);
         } else {
-            console.log("###user", user);
             const result = user.filter(u => u.nomeCompleto && u.nomeCompleto.toUpperCase().includes(search.toUpperCase()));
-            console.log("@@@result", result);
             setFilter(result);
         }
     }, [search]);
@@ -69,11 +67,7 @@ const DevUsers = () => {
                 marginLeft: "15%",
             }} >
                 <form>
-                    <input
-                        style={{
-                            width: "100%",
-                            height: "3vw"
-                        }}
+                    <Box
                         type="text"
                         id="search"
                         name="search"
@@ -88,6 +82,7 @@ const DevUsers = () => {
                             display: "flex",
                             justifyContent: "space-between",
                             border: "2px solid #841e8a",
+                            paddingRight: "50px",
                             borderBottom: "0",
                             // borderTop: "0",
                             borderRight: "0",
@@ -95,8 +90,9 @@ const DevUsers = () => {
                         }}>
                             <div style={{
                                 cursor: "pointer",
-                                marginTop: "15px",
-                                marginBottom: "15px",
+                                marginTop: "20px",
+                                marginBottom: "20px",
+                                marginLeft: "20px"
                             }} onClick={() => { setSelectedUser(u); setModalVisible(true); }} >
                                 <UsersDev user={u} />
                             </div>
@@ -105,9 +101,8 @@ const DevUsers = () => {
                                 justifyItems: 'center',
                                 alignItems: "center",
                             }}>
-                                <Button>Deletar</Button>
+                                <Button onClick={() => remove(u.id)}>Deletar</Button>
                             </div>
-                            {/* onClick={() => remove(u.id)} */}
                         </div>
                     );
                 })}

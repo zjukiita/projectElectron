@@ -13,15 +13,20 @@ export const Modaal = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0;
 `;
 
 export const Container = styled.div`
+    display: flex;
+    justify-content: center;
     background-color: #424242;
     border-radius: 10px;
+    margin: 0;
     color: #000;
-    width: 90%;
+    width: 60%;
     height: 90%;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
 `;
 
 export const Button = styled.button`
@@ -63,3 +68,46 @@ export const Close = styled.button`
         transform: rotate(-45deg);
     }
 `;
+
+
+export const Label = styled.label`
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    color: #fff;
+    font-size: 3vw;
+`;
+
+export const Box = styled.input`
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 0;
+    width: 100%;
+    height: 5vw;
+    color: white;
+    font-size: 2.5vw;
+    border: none;
+    outline: none;
+    background-color: #363636;
+`;
+
+export const Buttoon = styled.button`
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    margin: 0;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 10%;
+    font-size: 2vw;
+    margin-top: 20px;
+
+    &:hover {
+        color: #7600a9;
+        border: 2px #7600a9 solid;
+        background-color: transparent;
+    }
+`

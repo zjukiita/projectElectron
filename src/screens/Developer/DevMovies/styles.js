@@ -9,3 +9,13 @@ export const Button = styled.button`
     border-radius: 10px;
     font-size: 2vw;
 `;
+
+export const Box = styled.input`
+    width: 100%;
+    color: white;
+    font-size: 2.5vw;
+    height: 6vw;
+    border: none;
+    outline: none;
+    background-color: #363636;
+`;

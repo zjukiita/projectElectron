@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Modaal, Container, Close } from './styles';
+import { Modaal, Container, Box, Label, Buttoon } from './styles';
 
 const ModalUsers = ({ id = 'mod', onClose = () => { }, selectedUser, onUpdate = () => { } }) => {
 
@@ -22,14 +22,12 @@ const ModalUsers = ({ id = 'mod', onClose = () => { }, selectedUser, onUpdate = 
             nomeCompleto: user.nomeCompleto || '',
             usuario: user.usuario || '',
             email: user.email || '',
-            senha: user.senha || '',
         },
         enableReinitialize: true,
         validationSchema: Yup.object({
             nomeCompleto: Yup.string().required('Obrigatório'),
             usuario: Yup.string().required('Obrigatório'),
             email: Yup.string().required('Obrigatório'),
-            senha: Yup.string().required('Obrigatório'),
         }),
         onSubmit: async (values) => {
             try {
@@ -42,7 +40,7 @@ const ModalUsers = ({ id = 'mod', onClose = () => { }, selectedUser, onUpdate = 
                 onClose();
                 // alert(JSON.stringify(values, null, 2));
             } catch (error) {
-                console.log('erro')
+                console.log(error)
             }
         }
     })
@@ -51,42 +49,44 @@ const ModalUsers = ({ id = 'mod', onClose = () => { }, selectedUser, onUpdate = 
         <div>
             <Modaal id={id} className="mod" onClick={handleOutsideClick} >
                 <Container>
-                    <Close onClick={onClose} />
-                    <form onSubmit={formik.handleSubmit}>
-                        <div>
-                            <label htmlFor="nomeCompleto">Nome</label>
-                            <input
-                                id="nomeCompleto"
-                                type="text"
-                                {...formik.getFieldProps('nomeCompleto')}
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="usuario">Usuário</label>
-                            <input
-                                id="usuario"
-                                type="text"
-                                {...formik.getFieldProps('usuario')}
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="email">Email</label>
-                            <input
-                                id="email"
-                                type="text"
-                                {...formik.getFieldProps('email')}
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="senha">Senha</label>
-                            <input
-                                id="senha"
-                                type="text"
-                                {...formik.getFieldProps('senha')}
-                            />
-                        </div>
-                        <button type="submit" >Enviar</button>
-                    </form>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        margin: "0",
+                        width: "40vw",
+                        height: "40vw",
+                        paddingTop: "40px",
+                    }}>
+                        <form onSubmit={formik.handleSubmit}>
+                            <div>
+                                <Label htmlFor="nomeCompleto">Nome</Label>
+                                <Box
+                                    id="nomeCompleto"
+                                    type="text"
+                                    {...formik.getFieldProps('nomeCompleto')}
+                                />
+                            </div>
+                            <div>
+                                <Label htmlFor="usuario">Usuário</Label>
+                                <Box
+                                    id="usuario"
+                                    type="text"
+                                    {...formik.getFieldProps('usuario')}
+                                />
+                            </div>
+                            <div>
+                                <Label htmlFor="email">Email</Label>
+                                <Box
+                                    id="email"
+                                    type="text"
+                                    {...formik.getFieldProps('email')}
+                                />
+                            </div>
+                            <div>
+                                <Buttoon type="submit" >Enviar</Buttoon>
+                            </div>
+                        </form>
+                    </div>
                 </Container>
             </Modaal>
         </div>

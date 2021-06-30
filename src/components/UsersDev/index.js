@@ -6,7 +6,6 @@ const MoviesDev = ({ user }) => {
         <div style={{
             display: "flex",
             flexDirection: "column",
-            marginLeft: "10px"
         }}>
             <P>Id: {user.id}</P>
             <P>Nome: {user.nomeCompleto}</P>

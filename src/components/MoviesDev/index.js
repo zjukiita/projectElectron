@@ -11,7 +11,7 @@ const MoviesDev = ({ movie }) => {
                 style={{
                     width: "12vw",
                     height: "12vw",
-                    borderRadius: "50%"
+                    borderRadius: "30%"
                 }}
                 src={movie.imagem}
                 alt={movie.nome}

@@ -26,15 +26,25 @@ export const Container = styled.div`
 
 export const Button = styled.button`
     display: flex;
+    justify-content: center;
+    width: 10vw;
+    height: 4vw;
     background-color: transparent;
+    margin: 0;
     color: #fff;
     cursor: pointer;
-    border: 10px;
-    border-color: #fff;
+    border-radius: 10%;
     font-size: 2vw;
     margin-left: 25px;
+    margin-top: 20px;
     margin-bottom: 20px;
-`;
+
+    &:hover {
+        color: #7600a9;
+        border: 2px #7600a9 solid;
+        background-color: transparent;
+    }
+`
 
 export const Close = styled.button`
     background-color: transparent;
@@ -63,3 +73,41 @@ export const Close = styled.button`
         transform: rotate(-45deg);
     }
 `;
+
+export const Box = styled.input`
+    width: 80vw;
+    color: white;
+    font-size: 2vw;
+    height: 50px;
+    border: none;
+    outline: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #363636;
+`;
+
+export const Label = styled.label`
+    color: #fff;
+    font-size: 3vw;
+`;
+
+export const Buttoon = styled.button`
+    display: flex;
+    justify-content: center;
+    width: 10vw;
+    height: 4vw;
+    background-color: transparent;
+    margin: 0;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 10%;
+    font-size: 2vw;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    &:hover {
+        color: #7600a9;
+        border: 2px #7600a9 solid;
+        background-color: transparent;
+    }
+`

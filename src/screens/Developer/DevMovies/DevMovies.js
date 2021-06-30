@@ -3,7 +3,7 @@ import GlobalMenuDev from '../../../components/GlobalMenuDev';
 import MoviesDev from '../../../components/MoviesDev';
 import Modal from '../../../components/ModalDev';
 import api from '../../../services/api';
-import { Button } from './styles';
+import { Button, Box } from './styles';
 
 const DevMovies = () => {
 
@@ -67,11 +67,7 @@ const DevMovies = () => {
                 marginLeft: "15%",
             }} >
                 <form>
-                    <input
-                        style={{
-                            width: "100%",
-                            height: "3vw"
-                        }}
+                    <Box
                         type="text"
                         id="search"
                         name="search"
@@ -84,12 +80,14 @@ const DevMovies = () => {
                     return (
                         <div key={m.id} style={{
                             display: "flex",
-                            justifyContent: "space-between"
+                            justifyContent: "space-between",
+                            marginRight: "50px"
                         }}>
                             <div style={{
                                 cursor: "pointer",
-                                marginTop: "15px",
-                                marginBottom: "15px"
+                                marginTop: "20px",
+                                marginBottom: "20px",
+                                marginLeft: "20px"
                             }} onClick={() => { setSelectedMovie(m); setModalVisible(true); }} >
                                 <MoviesDev movie={m} />
                             </div>
@@ -98,9 +96,8 @@ const DevMovies = () => {
                                 justifyItems: 'center',
                                 alignItems: "center",
                             }}>
-                                <Button>Deletar</Button>
+                                <Button onClick={() => remove(m.id)}>Deletar</Button>
                             </div>
-                            {/* onClick={() => remove(m.id)} */}
                         </div>
                     );
                 })}

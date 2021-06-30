@@ -10,3 +10,13 @@ export const Button = styled.button`
     font-size: 2vw;
     margin-right: 10px
 `;
+
+export const Box = styled.input`
+    width: 100%;
+    color: white;
+    font-size: 2.5vw;
+    height: 6vw;
+    border: none;
+    outline: none;
+    background-color: #363636;
+`;
